@@ -1,6 +1,6 @@
 """
-缠论多智能体工作流 v2.0
-集成结构分析和动力学分析智能体
+缠论多智能体工作流 v3.0
+集成市场情绪、跨市场联动、链上数据智能体
 """
 from typing import TypedDict, Annotated, Optional, Dict, Any, List
 from langgraph.graph import StateGraph, END
@@ -20,15 +20,24 @@ class ChanlunState(TypedDict):
     kline_data: Optional[Dict[str, Any]]
     data_quality: Optional[Dict[str, Any]]
 
-    # 系统监控结果
-    system_health: Optional[Dict[str, Any]]
-    data_quality_report: Optional[Dict[str, Any]]
-
     # 结构分析结果
     structure_analysis: Optional[Dict[str, Any]]
 
     # 动力学分析结果
     dynamics_analysis: Optional[Dict[str, Any]]
+
+    # 市场情绪分析结果 ⭐ 新增
+    sentiment_analysis: Optional[Dict[str, Any]]
+
+    # 跨市场联动分析结果 ⭐ 新增
+    cross_market_analysis: Optional[Dict[str, Any]]
+
+    # 链上数据分析结果 ⭐ 新增
+    onchain_analysis: Optional[Dict[str, Any]]
+
+    # 系统监控结果
+    system_health: Optional[Dict[str, Any]]
+    data_quality_report: Optional[Dict[str, Any]]
 
     # 模拟盘数据
     simulation_performance: Optional[Dict[str, Any]]
@@ -191,6 +200,90 @@ def node_dynamics_analyzer(state: ChanlunState) -> ChanlunState:
     return state
 
 
+def node_sentiment_analyzer(state: ChanlunState) -> ChanlunState:
+    """市场情绪分析节点 ⭐ 新增"""
+    from agents.sentiment_analyzer import build_agent
+
+    agent = build_agent()
+
+    prompt = """请进行市场情绪分析。
+
+需要分析：
+1. 恐慌贪婪指数（Fear & Greed Index）
+2. 资金费率（Funding Rate）
+3. 爆仓数据
+4. 持仓量变化
+
+请综合分析市场情绪，并提供情绪层面的交易建议。"""
+
+    response = agent.invoke({"messages": [HumanMessage(content=prompt)]})
+
+    last_message = response["messages"][-1]
+    state["messages"].append(last_message)
+    state["sentiment_analysis"] = {
+        "status": "completed",
+        "agent_response": str(last_message.content)
+    }
+
+    return state
+
+
+def node_cross_market_analyzer(state: ChanlunState) -> ChanlunState:
+    """跨市场联动分析节点 ⭐ 新增"""
+    from agents.cross_market_analyzer import build_agent
+
+    agent = build_agent()
+
+    prompt = """请进行跨市场联动分析。
+
+需要分析：
+1. 美股市场（标普500、纳斯达克）
+2. 黄金市场
+3. 美元指数（DXY）
+4. 加密货币市场内部结构
+
+请综合分析跨市场影响，并提供宏观层面的交易建议。"""
+
+    response = agent.invoke({"messages": [HumanMessage(content=prompt)]})
+
+    last_message = response["messages"][-1]
+    state["messages"].append(last_message)
+    state["cross_market_analysis"] = {
+        "status": "completed",
+        "agent_response": str(last_message.content)
+    }
+
+    return state
+
+
+def node_onchain_analyzer(state: ChanlunState) -> ChanlunState:
+    """链上数据分析节点 ⭐ 新增"""
+    from agents.onchain_analyzer import build_agent
+
+    agent = build_agent()
+
+    prompt = """请进行链上数据分析。
+
+需要分析：
+1. 交易所流入流出
+2. 巨鲸活动动向
+3. 网络健康状况（活跃地址、内存池）
+4. 算力和难度变化
+
+请综合分析链上信号，并提供链上层面的交易建议。"""
+
+    response = agent.invoke({"messages": [HumanMessage(content=prompt)]})
+
+    last_message = response["messages"][-1]
+    state["messages"].append(last_message)
+    state["onchain_analysis"] = {
+        "status": "completed",
+        "agent_response": str(last_message.content)
+    }
+
+    return state
+
+
 def node_system_monitor(state: ChanlunState) -> ChanlunState:
     """系统监控节点"""
     from agents.system_monitor import build_agent
@@ -267,6 +360,15 @@ def node_decision_maker(state: ChanlunState) -> ChanlunState:
 ### 动力学分析
 {state.get("dynamics_analysis", {}).get("agent_response", "无")}
 
+### 市场情绪分析 ⭐ 新增
+{state.get("sentiment_analysis", {}).get("agent_response", "无")}
+
+### 跨市场联动分析 ⭐ 新增
+{state.get("cross_market_analysis", {}).get("agent_response", "无")}
+
+### 链上数据分析 ⭐ 新增
+{state.get("onchain_analysis", {}).get("agent_response", "无")}
+
 ### 系统健康
 {state.get("system_health", {}).get("agent_response", "无")}
 
@@ -274,7 +376,15 @@ def node_decision_maker(state: ChanlunState) -> ChanlunState:
 {state.get("simulation_performance", {}).get("agent_response", "无")}
 
 ## 任务
-请基于缠论理论和以上分析，进行综合研判并输出交易决策。
+请基于缠论理论和以上所有维度的分析，进行综合研判并输出交易决策。
+
+## 维度权重
+- 结构分析：30%
+- 动力学分析：25%
+- 市场情绪分析：15%
+- 跨市场联动分析：15%
+- 链上数据分析：10%
+- 模拟盘绩效：5%
 
 ## 输出要求
 必须包含：
@@ -285,7 +395,8 @@ def node_decision_maker(state: ChanlunState) -> ChanlunState:
 - 止盈目标
 - 建议仓位
 - 风险等级
-- 详细分析逻辑（结构+动力学+多周期+共振）
+- 详细分析逻辑（结构+动力学+情绪+跨市场+链上+模拟盘）
+- 多维度共振确认
 
 如果信号不明确，请明确说明保持观望。
 """
@@ -303,7 +414,7 @@ def node_decision_maker(state: ChanlunState) -> ChanlunState:
 
 
 def build_chanlun_workflow():
-    """构建缠论多智能体工作流 v2.0"""
+    """构建缠论多智能体工作流 v3.0"""
 
     workflow = StateGraph(ChanlunState)
 
@@ -311,6 +422,9 @@ def build_chanlun_workflow():
     workflow.add_node("data_collector", node_data_collector)
     workflow.add_node("structure_analyzer", node_structure_analyzer)
     workflow.add_node("dynamics_analyzer", node_dynamics_analyzer)
+    workflow.add_node("sentiment_analyzer", node_sentiment_analyzer)  # ⭐ 新增
+    workflow.add_node("cross_market_analyzer", node_cross_market_analyzer)  # ⭐ 新增
+    workflow.add_node("onchain_analyzer", node_onchain_analyzer)  # ⭐ 新增
     workflow.add_node("system_monitor", node_system_monitor)
     workflow.add_node("simulation_check", node_simulation_check)
     workflow.add_node("decision_maker", node_decision_maker)
@@ -321,7 +435,10 @@ def build_chanlun_workflow():
     # 定义边（执行顺序）
     workflow.add_edge("data_collector", "structure_analyzer")
     workflow.add_edge("structure_analyzer", "dynamics_analyzer")
-    workflow.add_edge("dynamics_analyzer", "system_monitor")
+    workflow.add_edge("dynamics_analyzer", "sentiment_analyzer")  # ⭐ 新增
+    workflow.add_edge("sentiment_analyzer", "cross_market_analyzer")  # ⭐ 新增
+    workflow.add_edge("cross_market_analyzer", "onchain_analyzer")  # ⭐ 新增
+    workflow.add_edge("onchain_analyzer", "system_monitor")  # ⭐ 新增
     workflow.add_edge("system_monitor", "simulation_check")
     workflow.add_edge("simulation_check", "decision_maker")
     workflow.add_edge("decision_maker", END)
@@ -331,7 +448,7 @@ def build_chanlun_workflow():
 
 def run_chanlun_analysis(user_request: str, symbol: str = "BTCUSDT", interval: str = "1h"):
     """
-    运行缠论分析 v2.0
+    运行缠论分析 v3.0
 
     Args:
         user_request: 用户请求描述
@@ -354,6 +471,9 @@ def run_chanlun_analysis(user_request: str, symbol: str = "BTCUSDT", interval: s
         "data_quality": None,
         "structure_analysis": None,
         "dynamics_analysis": None,
+        "sentiment_analysis": None,
+        "cross_market_analysis": None,
+        "onchain_analysis": None,
         "system_health": None,
         "data_quality_report": None,
         "simulation_performance": None,
