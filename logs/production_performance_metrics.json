@@ -1,0 +1,225 @@
+{
+  "system_stats": {
+    "cpu": [
+      {
+        "timestamp": "2026-04-17T07:45:26.954141",
+        "cpu_percent": 90.0
+      },
+      {
+        "timestamp": "2026-04-17T07:45:27.554879",
+        "cpu_percent": 44.4
+      },
+      {
+        "timestamp": "2026-04-17T07:45:28.155604",
+        "cpu_percent": 50.0
+      },
+      {
+        "timestamp": "2026-04-17T07:45:28.756315",
+        "cpu_percent": 90.9
+      },
+      {
+        "timestamp": "2026-04-17T07:45:29.356996",
+        "cpu_percent": 44.4
+      },
+      {
+        "timestamp": "2026-04-17T07:45:29.957619",
+        "cpu_percent": 55.6
+      },
+      {
+        "timestamp": "2026-04-17T07:45:30.558558",
+        "cpu_percent": 27.3
+      },
+      {
+        "timestamp": "2026-04-17T07:45:31.159299",
+        "cpu_percent": 83.3
+      },
+      {
+        "timestamp": "2026-04-17T07:45:31.760329",
+        "cpu_percent": 70.0
+      }
+    ],
+    "memory": [
+      {
+        "timestamp": "2026-04-17T07:45:26.954141",
+        "memory_percent": 29.2,
+        "memory_used": 0.5642471313476562,
+        "memory_total": 1.9318656921386719
+      },
+      {
+        "timestamp": "2026-04-17T07:45:27.554879",
+        "memory_percent": 29.2,
+        "memory_used": 0.5650558471679688,
+        "memory_total": 1.9318656921386719
+      },
+      {
+        "timestamp": "2026-04-17T07:45:28.155604",
+        "memory_percent": 29.2,
+        "memory_used": 0.5650558471679688,
+        "memory_total": 1.9318656921386719
+      },
+      {
+        "timestamp": "2026-04-17T07:45:28.756315",
+        "memory_percent": 29.3,
+        "memory_used": 0.56512451171875,
+        "memory_total": 1.9318656921386719
+      },
+      {
+        "timestamp": "2026-04-17T07:45:29.356996",
+        "memory_percent": 29.3,
+        "memory_used": 0.56512451171875,
+        "memory_total": 1.9318656921386719
+      },
+      {
+        "timestamp": "2026-04-17T07:45:29.957619",
+        "memory_percent": 29.3,
+        "memory_used": 0.5650825500488281,
+        "memory_total": 1.9318656921386719
+      },
+      {
+        "timestamp": "2026-04-17T07:45:30.558558",
+        "memory_percent": 29.3,
+        "memory_used": 0.5650978088378906,
+        "memory_total": 1.9318656921386719
+      },
+      {
+        "timestamp": "2026-04-17T07:45:31.159299",
+        "memory_percent": 29.5,
+        "memory_used": 0.569610595703125,
+        "memory_total": 1.9318656921386719
+      },
+      {
+        "timestamp": "2026-04-17T07:45:31.760329",
+        "memory_percent": 29.3,
+        "memory_used": 0.5662040710449219,
+        "memory_total": 1.9318656921386719
+      }
+    ],
+    "disk": [
+      {
+        "timestamp": "2026-04-17T07:45:26.954141",
+        "disk_percent": 52.6,
+        "disk_used": 1757.6422157287598,
+        "disk_total": 3519.7501831054688
+      },
+      {
+        "timestamp": "2026-04-17T07:45:27.554879",
+        "disk_percent": 52.6,
+        "disk_used": 1757.6422119140625,
+        "disk_total": 3519.7501831054688
+      },
+      {
+        "timestamp": "2026-04-17T07:45:28.155604",
+        "disk_percent": 52.6,
+        "disk_used": 1757.6422157287598,
+        "disk_total": 3519.7501831054688
+      },
+      {
+        "timestamp": "2026-04-17T07:45:28.756315",
+        "disk_percent": 52.6,
+        "disk_used": 1757.6422157287598,
+        "disk_total": 3519.7501831054688
+      },
+      {
+        "timestamp": "2026-04-17T07:45:29.356996",
+        "disk_percent": 52.6,
+        "disk_used": 1757.6422233581543,
+        "disk_total": 3519.7501831054688
+      },
+      {
+        "timestamp": "2026-04-17T07:45:29.957619",
+        "disk_percent": 52.6,
+        "disk_used": 1757.642219543457,
+        "disk_total": 3519.7501831054688
+      },
+      {
+        "timestamp": "2026-04-17T07:45:30.558558",
+        "disk_percent": 52.6,
+        "disk_used": 1757.6422233581543,
+        "disk_total": 3519.7501831054688
+      },
+      {
+        "timestamp": "2026-04-17T07:45:31.159299",
+        "disk_percent": 52.6,
+        "disk_used": 1757.6422271728516,
+        "disk_total": 3519.7501831054688
+      },
+      {
+        "timestamp": "2026-04-17T07:45:31.760329",
+        "disk_percent": 52.6,
+        "disk_used": 1757.6422309875488,
+        "disk_total": 3519.7501831054688
+      }
+    ],
+    "network": [
+      {
+        "timestamp": "2026-04-17T07:45:26.954141",
+        "bytes_sent": 2651324156,
+        "bytes_recv": 136907068,
+        "packets_sent": 419821,
+        "packets_recv": 430641
+      },
+      {
+        "timestamp": "2026-04-17T07:45:27.554879",
+        "bytes_sent": 2651331274,
+        "bytes_recv": 136916830,
+        "packets_sent": 419865,
+        "packets_recv": 430685
+      },
+      {
+        "timestamp": "2026-04-17T07:45:28.155604",
+        "bytes_sent": 2651340770,
+        "bytes_recv": 136922924,
+        "packets_sent": 419913,
+        "packets_recv": 430733
+      },
+      {
+        "timestamp": "2026-04-17T07:45:28.756315",
+        "bytes_sent": 2651348648,
+        "bytes_recv": 136928061,
+        "packets_sent": 419955,
+        "packets_recv": 430775
+      },
+      {
+        "timestamp": "2026-04-17T07:45:29.356996",
+        "bytes_sent": 2651352934,
+        "bytes_recv": 136930754,
+        "packets_sent": 419974,
+        "packets_recv": 430794
+      },
+      {
+        "timestamp": "2026-04-17T07:45:29.957619",
+        "bytes_sent": 2651438850,
+        "bytes_recv": 136984055,
+        "packets_sent": 420396,
+        "packets_recv": 431216
+      },
+      {
+        "timestamp": "2026-04-17T07:45:30.558558",
+        "bytes_sent": 2651438850,
+        "bytes_recv": 136984055,
+        "packets_sent": 420396,
+        "packets_recv": 431216
+      },
+      {
+        "timestamp": "2026-04-17T07:45:31.159299",
+        "bytes_sent": 2651445820,
+        "bytes_recv": 136988873,
+        "packets_sent": 420412,
+        "packets_recv": 431234
+      },
+      {
+        "timestamp": "2026-04-17T07:45:31.760329",
+        "bytes_sent": 2656369156,
+        "bytes_recv": 137004157,
+        "packets_sent": 420575,
+        "packets_recv": 431351
+      }
+    ]
+  },
+  "warning_thresholds": {
+    "cpu": 80.0,
+    "memory": 80.0,
+    "disk": 90.0
+  },
+  "export_time": "2026-04-17T07:45:32.261084"
+}
