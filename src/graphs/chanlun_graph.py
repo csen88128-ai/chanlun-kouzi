@@ -1,6 +1,6 @@
 """
-缠论多智能体工作流 v3.0
-集成市场情绪、跨市场联动、链上数据智能体
+缠论多智能体工作流 v4.0
+集成研报生成和历史决策回溯
 """
 from typing import TypedDict, Annotated, Optional, Dict, Any, List
 from langgraph.graph import StateGraph, END
@@ -26,13 +26,13 @@ class ChanlunState(TypedDict):
     # 动力学分析结果
     dynamics_analysis: Optional[Dict[str, Any]]
 
-    # 市场情绪分析结果 ⭐ 新增
+    # 市场情绪分析结果
     sentiment_analysis: Optional[Dict[str, Any]]
 
-    # 跨市场联动分析结果 ⭐ 新增
+    # 跨市场联动分析结果
     cross_market_analysis: Optional[Dict[str, Any]]
 
-    # 链上数据分析结果 ⭐ 新增
+    # 链上数据分析结果
     onchain_analysis: Optional[Dict[str, Any]]
 
     # 系统监控结果
@@ -45,6 +45,10 @@ class ChanlunState(TypedDict):
 
     # 最终决策
     trading_decision: Optional[Dict[str, Any]]
+
+    # 研报和历史记录 ⭐ 新增
+    report_path: Optional[str]
+    decision_stats: Optional[Dict[str, Any]]
 
 
 def node_data_collector(state: ChanlunState) -> ChanlunState:
@@ -201,7 +205,7 @@ def node_dynamics_analyzer(state: ChanlunState) -> ChanlunState:
 
 
 def node_sentiment_analyzer(state: ChanlunState) -> ChanlunState:
-    """市场情绪分析节点 ⭐ 新增"""
+    """市场情绪分析节点"""
     from agents.sentiment_analyzer import build_agent
 
     agent = build_agent()
@@ -229,7 +233,7 @@ def node_sentiment_analyzer(state: ChanlunState) -> ChanlunState:
 
 
 def node_cross_market_analyzer(state: ChanlunState) -> ChanlunState:
-    """跨市场联动分析节点 ⭐ 新增"""
+    """跨市场联动分析节点"""
     from agents.cross_market_analyzer import build_agent
 
     agent = build_agent()
@@ -257,7 +261,7 @@ def node_cross_market_analyzer(state: ChanlunState) -> ChanlunState:
 
 
 def node_onchain_analyzer(state: ChanlunState) -> ChanlunState:
-    """链上数据分析节点 ⭐ 新增"""
+    """链上数据分析节点"""
     from agents.onchain_analyzer import build_agent
 
     agent = build_agent()
@@ -360,13 +364,13 @@ def node_decision_maker(state: ChanlunState) -> ChanlunState:
 ### 动力学分析
 {state.get("dynamics_analysis", {}).get("agent_response", "无")}
 
-### 市场情绪分析 ⭐ 新增
+### 市场情绪分析
 {state.get("sentiment_analysis", {}).get("agent_response", "无")}
 
-### 跨市场联动分析 ⭐ 新增
+### 跨市场联动分析
 {state.get("cross_market_analysis", {}).get("agent_response", "无")}
 
-### 链上数据分析 ⭐ 新增
+### 链上数据分析
 {state.get("onchain_analysis", {}).get("agent_response", "无")}
 
 ### 系统健康
@@ -413,8 +417,58 @@ def node_decision_maker(state: ChanlunState) -> ChanlunState:
     return state
 
 
+def node_report_generator(state: ChanlunState) -> ChanlunState:
+    """研报生成节点 ⭐ 新增"""
+    from agents.report_generator import generate_analysis_report, get_decision_stats
+    import os
+
+    symbol = state.get("symbol", "BTCUSDT")
+    interval = state.get("interval", "1h")
+
+    # 生成研报
+    report_result = generate_analysis_report(
+        symbol=symbol,
+        interval=interval,
+        structure_data=state.get("structure_analysis"),
+        dynamics_data=state.get("dynamics_analysis"),
+        sentiment_data=state.get("sentiment_analysis"),
+        cross_market_data=state.get("cross_market_analysis"),
+        onchain_data=state.get("onchain_analysis"),
+        decision_data=state.get("trading_decision")
+    )
+
+    # 获取决策统计
+    decision_stats = get_decision_stats(last_n=50)
+
+    # 保存报告路径
+    state["report_path"] = report_result.get("save_path")
+    state["decision_stats"] = decision_stats
+
+    # 添加报告信息到消息
+    report_message = f"""
+## 研报生成完成
+
+- **报告路径**: {report_result.get('save_path')}
+- **决策ID**: {report_result.get('decision_id', 'N/A')}
+
+## 历史决策统计
+
+- **总决策数**: {decision_stats.get('total', 0)}
+- **已执行**: {decision_stats.get('executed', 0)}
+- **已平仓**: {decision_stats.get('closed', 0)}
+- **胜率**: {decision_stats.get('pnl', {}).get('win_rate', 0)}%
+- **总盈亏**: {decision_stats.get('pnl', {}).get('total_pnl', 0)}
+
+研报已保存到文件，请查看详细内容。
+"""
+
+    state["messages"].append(AIMessage(content=report_message))
+
+    return state
+
+
 def build_chanlun_workflow():
-    """构建缠论多智能体工作流 v3.0"""
+    """构建缠论多智能体工作流 v4.0"""
 
     workflow = StateGraph(ChanlunState)
 
@@ -422,12 +476,13 @@ def build_chanlun_workflow():
     workflow.add_node("data_collector", node_data_collector)
     workflow.add_node("structure_analyzer", node_structure_analyzer)
     workflow.add_node("dynamics_analyzer", node_dynamics_analyzer)
-    workflow.add_node("sentiment_analyzer", node_sentiment_analyzer)  # ⭐ 新增
-    workflow.add_node("cross_market_analyzer", node_cross_market_analyzer)  # ⭐ 新增
-    workflow.add_node("onchain_analyzer", node_onchain_analyzer)  # ⭐ 新增
+    workflow.add_node("sentiment_analyzer", node_sentiment_analyzer)
+    workflow.add_node("cross_market_analyzer", node_cross_market_analyzer)
+    workflow.add_node("onchain_analyzer", node_onchain_analyzer)
     workflow.add_node("system_monitor", node_system_monitor)
     workflow.add_node("simulation_check", node_simulation_check)
     workflow.add_node("decision_maker", node_decision_maker)
+    workflow.add_node("report_generator", node_report_generator)  # ⭐ 新增
 
     # 设置入口
     workflow.set_entry_point("data_collector")
@@ -435,20 +490,21 @@ def build_chanlun_workflow():
     # 定义边（执行顺序）
     workflow.add_edge("data_collector", "structure_analyzer")
     workflow.add_edge("structure_analyzer", "dynamics_analyzer")
-    workflow.add_edge("dynamics_analyzer", "sentiment_analyzer")  # ⭐ 新增
-    workflow.add_edge("sentiment_analyzer", "cross_market_analyzer")  # ⭐ 新增
-    workflow.add_edge("cross_market_analyzer", "onchain_analyzer")  # ⭐ 新增
-    workflow.add_edge("onchain_analyzer", "system_monitor")  # ⭐ 新增
+    workflow.add_edge("dynamics_analyzer", "sentiment_analyzer")
+    workflow.add_edge("sentiment_analyzer", "cross_market_analyzer")
+    workflow.add_edge("cross_market_analyzer", "onchain_analyzer")
+    workflow.add_edge("onchain_analyzer", "system_monitor")
     workflow.add_edge("system_monitor", "simulation_check")
     workflow.add_edge("simulation_check", "decision_maker")
-    workflow.add_edge("decision_maker", END)
+    workflow.add_edge("decision_maker", "report_generator")  # ⭐ 新增
+    workflow.add_edge("report_generator", END)  # ⭐ 新增
 
     return workflow.compile()
 
 
 def run_chanlun_analysis(user_request: str, symbol: str = "BTCUSDT", interval: str = "1h"):
     """
-    运行缠论分析 v3.0
+    运行缠论分析 v4.0
 
     Args:
         user_request: 用户请求描述
@@ -478,7 +534,9 @@ def run_chanlun_analysis(user_request: str, symbol: str = "BTCUSDT", interval: s
         "data_quality_report": None,
         "simulation_performance": None,
         "open_positions": None,
-        "trading_decision": None
+        "trading_decision": None,
+        "report_path": None,  # ⭐ 新增
+        "decision_stats": None  # ⭐ 新增
     }
 
     # 执行工作流

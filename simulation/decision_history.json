@@ -1,0 +1,32 @@
+[
+  {
+    "decision_id": "BTCUSDT_1h_20260416_204421_334212",
+    "timestamp": "2026-04-16T20:44:21.334859",
+    "symbol": "BTCUSDT",
+    "interval": "1h",
+    "direction": "long",
+    "confidence": 75.0,
+    "entry_price": null,
+    "stop_loss": null,
+    "take_profit": null,
+    "position_size": 15.0,
+    "risk_level": "medium",
+    "structure_analysis": "上涨趋势",
+    "dynamics_analysis": "金叉信号",
+    "sentiment_analysis": "贪婪指数65",
+    "cross_market_analysis": "跨市场利好",
+    "onchain_analysis": "净流出500 BTC",
+    "decision_reason": "\n交易决策：\n- 交易方向：long（做多）\n- 置信度：75%\n- 入场价格：50000\n- 止损价格：49500\n- 止盈目标：51000，52000\n- 建议仓位：15%\n- 风险等级：medium\n\n关键因素：\n- 突破关键阻力位\n- MACD金叉\n- 交易所净流出\n",
+    "key_factors": [],
+    "executed": false,
+    "execution_time": null,
+    "actual_entry_price": null,
+    "closed": false,
+    "close_time": null,
+    "close_price": null,
+    "pnl": null,
+    "pnl_percent": null,
+    "correct": null,
+    "score": null
+  }
+]

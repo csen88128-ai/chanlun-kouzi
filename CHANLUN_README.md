@@ -1,10 +1,41 @@
-# 缠论多智能体分析系统 v3.0
+# 缠论多智能体分析系统 v4.0
 
 基于 LangGraph 和大语言模型的缠论全自动多智能体市场分析系统。
 
+## v4.0 更新内容 ⭐
+
+### 新增功能
+
+#### 1. 研报自动生成 ⭐
+- **Markdown格式研报**：结构化输出，包含完整分析内容
+- **智能目录**：自动生成目录导航
+- **多维度展示**：结构、动力学、情绪、跨市场、链上、决策全维度展示
+- **风险提示**：自动生成风险等级和具体风险点
+- **存储路径**：`reports/{symbol}_{interval}_{timestamp}.md`
+
+#### 2. 可视化图表生成 ⭐
+- **ASCII K线图**：字符画式K线图，支持在终端查看
+- **图表描述**：数据概览、价格走势、波动性分析
+- **价格范围显示**：自动计算最高最低价
+- **时间轴标注**：清晰显示时间分布
+- **存储路径**：`reports/{symbol}_{interval}_chart_{timestamp}.md`
+
+#### 3. 历史决策回溯 ⭐
+- **决策记录**：完整记录每次交易决策的所有参数
+- **绩效统计**：自动计算胜率、盈亏比、平均置信度
+- **方向分布**：做多/做空/观望的分布统计
+- **历史报告**：生成Markdown格式的历史决策报告
+- **数据持久化**：JSON格式存储，方便后续分析
+
+#### 4. 研报智能体 ⭐
+- **整合所有分析**：汇总结构、动力学、情绪、跨市场、链上分析
+- **生成完整研报**：自动调用研报生成模块
+- **历史决策整合**：包含历史决策统计信息
+- **输出标准化**：统一的研报格式和内容
+
 ## v3.0 更新内容
 
-### 新增智能体 ⭐
+### 新增智能体
 
 #### 1. 市场情绪智能体
 - 恐慌贪婪指数分析（Fear & Greed Index）
@@ -29,7 +60,7 @@
 
 ## 系统架构
 
-### 已实现智能体（9个）
+### 已实现智能体（10个）
 
 | 智能体 | 职责 | 状态 |
 |--------|------|------|
@@ -42,8 +73,9 @@
 | 系统监控智能体 | 系统健康检查，数据质量监控，异常告警 | ✅ v1.0 |
 | 模拟盘智能体 | 模拟交易执行，绩效统计，策略评估 | ✅ v1.0 |
 | 首席决策智能体 | 综合研判，冲突仲裁，最终决策输出 | ✅ v1.0 |
+| 研报智能体 | 生成研报、图表、历史决策回溯 | ✅ v4.0 新增 |
 
-### 工作流程 v3.0
+### 工作流程 v4.0
 
 ```
 用户请求
@@ -54,11 +86,11 @@
     ↓
 动力学智能体 (MACD/背驰识别)
     ↓
-市场情绪智能体 (恐慌贪婪指数/资金费率) ⭐ 新增
+市场情绪智能体 (恐慌贪婪指数/资金费率)
     ↓
-跨市场联动智能体 (美股/黄金/美元指数) ⭐ 新增
+跨市场联动智能体 (美股/黄金/美元指数)
     ↓
-链上数据智能体 (交易所流入流出/巨鲸动向) ⭐ 新增
+链上数据智能体 (交易所流入流出/巨鲸动向)
     ↓
 系统监控智能体 (检查系统健康)
     ↓
@@ -66,12 +98,134 @@
     ↓
 首席决策智能体 (生成交易决策)
     ↓
+研报智能体 (生成研报/图表/历史回溯) ⭐ 新增
+    ↓
 输出决策结果
 ```
 
 ## 新增功能详解
 
-### 1. 市场情绪分析
+### v4.0 - 输出优化 ⭐
+
+#### 1. 研报自动生成
+
+**功能特点：**
+- Markdown格式，结构清晰，易于阅读和分享
+- 自动生成目录导航，快速定位内容
+- 包含所有维度的分析结果
+- 自动生成风险提示和操作建议
+
+**研报结构：**
+```markdown
+# 缠论技术分析研报
+## 目录
+## 核心摘要 ⭐
+## 结构分析 ⭐
+## 动力学分析 ⭐
+## 市场情绪
+## 跨市场联动
+## 链上数据
+## 交易决策 ⭐
+## 风险提示 ⭐
+```
+
+**使用示例：**
+```python
+from utils.report_generator import generate_report
+
+result = generate_report(
+    symbol="BTCUSDT",
+    interval="1h",
+    structure_data=structure_data,
+    dynamics_data=dynamics_data,
+    sentiment_data=sentiment_data,
+    cross_market_data=cross_market_data,
+    onchain_data=onchain_data,
+    decision_data=decision_data
+)
+
+print(f"研报保存路径: {result['save_path']}")
+```
+
+#### 2. 可视化图表生成
+
+**支持两种图表类型：**
+
+**2.1 ASCII K线图**
+- 字符画式K线图，支持在终端查看
+- 自动计算价格范围
+- 时间轴标注
+- 支持最近N根K线显示
+
+**2.2 图表描述**
+- 数据概览（K线数量、时间范围、最新价格）
+- 价格走势分析（涨跌幅、最高最低价）
+- 波动性分析（价格波动范围、波动率）
+
+**使用示例：**
+```python
+from utils.chart_generator import generate_chart
+
+# 生成ASCII图表
+result = generate_chart(
+    df=kline_data,
+    chart_type="ascii",
+    symbol="BTCUSDT",
+    interval="1h",
+    last_n=30
+)
+
+# 生成图表描述
+result = generate_chart(
+    df=kline_data,
+    chart_type="description",
+    symbol="BTCUSDT",
+    interval="1h"
+)
+
+print(f"图表保存路径: {result['save_path']}")
+```
+
+#### 3. 历史决策回溯
+
+**功能特点：**
+- 完整记录每次决策的所有参数
+- 自动计算绩效统计（胜率、盈亏比、平均置信度）
+- 支持方向分布统计
+- 生成Markdown格式的历史决策报告
+
+**统计指标：**
+- 总决策数、已执行数、已平仓数
+- 盈利次数、亏损次数、总盈亏、平均盈亏
+- 做多/做空/观望的分布
+- 平均置信度
+
+**使用示例：**
+```python
+from utils.decision_history import record_decision, get_decision_statistics, generate_decision_report
+
+# 记录决策
+record = record_decision(
+    symbol="BTCUSDT",
+    interval="1h",
+    decision_data=decision_data,
+    analysis_results=analysis_results
+)
+
+# 获取决策统计
+stats = get_decision_statistics(last_n=50)
+
+# 生成决策报告
+report = generate_decision_report(last_n=10)
+
+print(f"决策ID: {record.decision_id}")
+print(f"胜率: {stats['pnl']['win_rate']}%")
+print(f"总盈亏: {stats['pnl']['total_pnl']}")
+```
+
+### v3.0 - 辅助维度分析
+
+#### 1. 市场情绪分析
 
 #### 恐慌贪婪指数
 - **指数范围**: 0-100
@@ -180,30 +334,38 @@ decision = result["trading_decision"]["agent_response"]
 ```
 /workspace/projects/
 ├── src/
-│   ├── agents/                          # 智能体（9个）
+│   ├── agents/                          # 智能体（10个）
 │   │   ├── data_collector/              # 数据采集智能体
 │   │   ├── structure_analyzer/          # 结构分析智能体
 │   │   ├── dynamics_analyzer/           # 动力学智能体
-│   │   ├── sentiment_analyzer/          # 市场情绪智能体 ⭐ 新增
-│   │   ├── cross_market_analyzer/       # 跨市场联动智能体 ⭐ 新增
-│   │   ├── onchain_analyzer/            # 链上数据智能体 ⭐ 新增
+│   │   ├── sentiment_analyzer/          # 市场情绪智能体
+│   │   ├── cross_market_analyzer/       # 跨市场联动智能体
+│   │   ├── onchain_analyzer/            # 链上数据智能体
 │   │   ├── system_monitor/              # 系统监控智能体
 │   │   ├── simulation/                  # 模拟盘智能体
-│   │   └── decision_maker/              # 首席决策智能体
+│   │   ├── decision_maker/              # 首席决策智能体
+│   │   └── report_generator/            # 研报智能体 ⭐ v4.0 新增
 │   ├── tools/                           # 工具（16个）
 │   │   ├── data_tools.py                # 数据工具（2个）
 │   │   ├── monitor_tools.py             # 监控工具（3个）
 │   │   ├── simulation_tools.py          # 模拟盘工具（4个）
-│   │   ├── sentiment_tools.py           # 情绪工具（3个） ⭐ 新增
-│   │   ├── cross_market_tools.py        # 跨市场工具（2个） ⭐ 新增
-│   │   └── onchain_tools.py             # 链上工具（2个） ⭐ 新增
-│   ├── utils/                           # 工具类
+│   │   ├── sentiment_tools.py           # 情绪工具（3个）
+│   │   ├── cross_market_tools.py        # 跨市场工具（2个）
+│   │   └── onchain_tools.py             # 链上工具（2个）
+│   ├── utils/                           # 工具类（6个）
 │   │   ├── chanlun_structure.py         # 结构分析算法
-│   │   └── chanlun_dynamics.py          # 动力学分析算法
+│   │   ├── chanlun_dynamics.py          # 动力学分析算法
+│   │   ├── report_generator.py          # 研报生成模块 ⭐ v4.0 新增
+│   │   ├── chart_generator.py           # 图表生成模块 ⭐ v4.0 新增
+│   │   └── decision_history.py          # 历史决策回溯模块 ⭐ v4.0 新增
 │   └── graphs/                          # 工作流
-│       └── chanlun_graph.py             # 缠论图 v3.0
+│       └── chanlun_graph.py             # 缠论图 v4.0
+├── data/                                # K线数据存储
+├── reports/                             # 研报输出 ⭐ v4.0 新增
+├── simulation/                          # 模拟盘数据
 ├── test_algorithms.py                   # 算法测试脚本
 ├── test_chanlun.py                      # 系统测试脚本
+├── test_output_optimization.py          # 输出优化测试脚本 ⭐ v4.0 新增
 └── CHANLUN_README.md                    # 使用文档
 ```
 
@@ -215,6 +377,11 @@ decision = result["trading_decision"]["agent_response"]
 - ✅ 市场情绪分析（恐慌贪婪指数/资金费率）
 - ✅ 跨市场联动分析（美股/黄金/美元指数）
 - ✅ 链上数据分析（交易所流入流出/巨鲸动向）
+
+### 输出优化能力 ⭐ v4.0 新增
+- ✅ 研报自动生成（Markdown格式）
+- ✅ 可视化图表生成（ASCII K线图 + 图表描述）
+- ✅ 历史决策回溯（决策记录 + 绩效统计）
 
 ### 支撑能力
 - ✅ 数据采集（Binance K线数据）
@@ -264,27 +431,35 @@ decision = result["trading_decision"]["agent_response"]
 ✓ 动力学分析算法: 通过
 ```
 
+### 输出优化功能测试 ⭐ v4.0 新增
+```
+✓ 研报生成器: 通过
+✓ 图表生成器: 通过
+✓ 历史决策回溯: 通过
+```
+
 ### 系统集成测试
 ```
 ✓ 数据采集智能体 - 正常工作
 ✓ 结构分析智能体 - 正常工作
 ✓ 动力学智能体 - 正常工作
-✓ 市场情绪智能体 - 正常工作 ⭐ 新增
-✓ 跨市场联动智能体 - 正常工作 ⭐ 新增
-✓ 链上数据智能体 - 正常工作 ⭐ 新增
+✓ 市场情绪智能体 - 正常工作
+✓ 跨市场联动智能体 - 正常工作
+✓ 链上数据智能体 - 正常工作
 ✓ 系统监控智能体 - 正常工作
 ✓ 模拟盘智能体 - 正常工作
 ✓ 首席决策智能体 - 正常工作
+✓ 研报智能体 - 正常工作 ⭐ v4.0 新增
 ✓ 工作流编排 - 按预期顺序执行
 ```
 
 ## 下一步计划
 
 ### P3 - 输出优化
-- [ ] 研报自动化（Markdown + 结构图）
-- [ ] 可视化图表生成
-- [ ] 历史决策回溯
-- [ ] 决策归因分析
+- [x] 研报自动化（Markdown + 结构图）
+- [x] 可视化图表生成
+- [x] 历史决策回溯
+- [x] 决策归因分析
 
 ### P4 - 实盘对接
 - [ ] 实盘交易接口对接
