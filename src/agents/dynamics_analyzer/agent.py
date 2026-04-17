@@ -10,9 +10,9 @@ from langgraph.graph import MessagesState
 from langgraph.graph.message import add_messages
 from langchain_core.messages import AnyMessage
 from coze_coding_utils.runtime_ctx.context import default_headers
-from storage.memory.memory_saver import get_memory_saver
-from utils.chanlun_dynamics import DynamicsAnalyzer
-from tools import get_kline_data
+from src.storage.memory.memory_saver import get_memory_saver
+from src.utils.chanlun_dynamics import DynamicsAnalyzer
+from src.tools import get_kline_data
 
 LLM_CONFIG = "config/agent_llm_config.json"
 MAX_MESSAGES = 40

@@ -59,7 +59,7 @@ class ChanlunState(TypedDict):
 
 def node_data_collector(state: ChanlunState) -> ChanlunState:
     """数据采集节点"""
-    from agents.data_collector import build_agent
+    from src.agents.data_collector import build_agent
 
     agent = build_agent()
 
@@ -85,10 +85,10 @@ def node_data_collector(state: ChanlunState) -> ChanlunState:
 
 def node_structure_analyzer(state: ChanlunState) -> ChanlunState:
     """结构分析节点"""
-    from agents.structure_analyzer import build_agent
+    from src.agents.structure_analyzer import build_agent
     import pandas as pd
     import os
-    from utils.chanlun_structure import ChanLunAnalyzer
+    from src.utils.chanlun_structure import ChanLunAnalyzer
 
     agent = build_agent()
 
@@ -148,10 +148,10 @@ def node_structure_analyzer(state: ChanlunState) -> ChanlunState:
 
 def node_dynamics_analyzer(state: ChanlunState) -> ChanlunState:
     """动力学分析节点"""
-    from agents.dynamics_analyzer import build_agent
+    from src.agents.dynamics_analyzer import build_agent
     import pandas as pd
     import os
-    from utils.chanlun_dynamics import DynamicsAnalyzer
+    from src.utils.chanlun_dynamics import DynamicsAnalyzer
 
     agent = build_agent()
 
@@ -212,7 +212,7 @@ def node_dynamics_analyzer(state: ChanlunState) -> ChanlunState:
 
 def node_practical_theory(state: ChanlunState) -> ChanlunState:
     """实战理论节点 ⭐ 新增"""
-    from agents.practical_theory import build_agent
+    from src.agents.practical_theory import build_agent
     import os
     import json
 
@@ -265,7 +265,7 @@ def node_practical_theory(state: ChanlunState) -> ChanlunState:
 
 def node_risk_manager(state: ChanlunState) -> ChanlunState:
     """风控节点 ⭐ 新增"""
-    from agents.risk_manager import build_agent
+    from src.agents.risk_manager import build_agent
     import json
 
     agent = build_agent()
@@ -308,7 +308,7 @@ def node_risk_manager(state: ChanlunState) -> ChanlunState:
 
 def node_sentiment_analyzer(state: ChanlunState) -> ChanlunState:
     """市场情绪分析节点"""
-    from agents.sentiment_analyzer import build_agent
+    from src.agents.sentiment_analyzer import build_agent
 
     agent = build_agent()
 
@@ -336,7 +336,7 @@ def node_sentiment_analyzer(state: ChanlunState) -> ChanlunState:
 
 def node_cross_market_analyzer(state: ChanlunState) -> ChanlunState:
     """跨市场联动分析节点"""
-    from agents.cross_market_analyzer import build_agent
+    from src.agents.cross_market_analyzer import build_agent
 
     agent = build_agent()
 
@@ -364,7 +364,7 @@ def node_cross_market_analyzer(state: ChanlunState) -> ChanlunState:
 
 def node_onchain_analyzer(state: ChanlunState) -> ChanlunState:
     """链上数据分析节点"""
-    from agents.onchain_analyzer import build_agent
+    from src.agents.onchain_analyzer import build_agent
 
     agent = build_agent()
 
@@ -392,7 +392,7 @@ def node_onchain_analyzer(state: ChanlunState) -> ChanlunState:
 
 def node_system_monitor(state: ChanlunState) -> ChanlunState:
     """系统监控节点"""
-    from agents.system_monitor import build_agent
+    from src.agents.system_monitor import build_agent
 
     agent = build_agent()
 
@@ -416,7 +416,7 @@ def node_system_monitor(state: ChanlunState) -> ChanlunState:
 
 def node_simulation_check(state: ChanlunState) -> ChanlunState:
     """模拟盘检查节点"""
-    from agents.simulation import build_agent
+    from src.agents.simulation import build_agent
 
     agent = build_agent()
 
@@ -440,7 +440,7 @@ def node_simulation_check(state: ChanlunState) -> ChanlunState:
 
 def node_decision_maker(state: ChanlunState) -> ChanlunState:
     """首席决策节点"""
-    from agents.decision_maker import build_agent
+    from src.agents.decision_maker import build_agent
 
     agent = build_agent()
 
@@ -521,7 +521,7 @@ def node_decision_maker(state: ChanlunState) -> ChanlunState:
 
 def node_report_generator(state: ChanlunState) -> ChanlunState:
     """研报生成节点 ⭐ 新增"""
-    from agents.report_generator import generate_analysis_report, get_decision_stats
+    from src.agents.report_generator import generate_analysis_report, get_decision_stats
     import os
 
     symbol = state.get("symbol", "BTCUSDT")
