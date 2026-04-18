@@ -1,0 +1,52 @@
+备份清单
+=========
+备份时间: Sat Apr 18 10:37:58 CST 2026
+备份目录: /workspace/projects/backup/weekly_20260418_103758
+备份类型: 每周备份
+
+备份文件列表:
+/workspace/projects/backup/weekly_20260418_103758/BACKUP_MANIFEST.txt
+/workspace/projects/backup/weekly_20260418_103758/BTCUSDT_4h_latest.csv
+/workspace/projects/backup/weekly_20260418_103758/CHANLUN_README.md
+/workspace/projects/backup/weekly_20260418_103758/CLEANUP_EXECUTION_REPORT.md
+/workspace/projects/backup/weekly_20260418_103758/FILE_CHECKLIST.md
+/workspace/projects/backup/weekly_20260418_103758/FILE_CLEANUP_REPORT.md
+/workspace/projects/backup/weekly_20260418_103758/config/agent_llm_config.json
+/workspace/projects/backup/weekly_20260418_103758/multi_agents/__init__.py
+/workspace/projects/backup/weekly_20260418_103758/multi_agents/__pycache__/__init__.cpython-312.pyc
+/workspace/projects/backup/weekly_20260418_103758/multi_agents/__pycache__/data_collector_agent.cpython-312.pyc
+/workspace/projects/backup/weekly_20260418_103758/multi_agents/__pycache__/decision_maker_agent.cpython-312.pyc
+/workspace/projects/backup/weekly_20260418_103758/multi_agents/__pycache__/dynamics_analyzer_agent.cpython-312.pyc
+/workspace/projects/backup/weekly_20260418_103758/multi_agents/__pycache__/sentiment_analyzer_agent.cpython-312.pyc
+/workspace/projects/backup/weekly_20260418_103758/multi_agents/__pycache__/structure_analyzer_agent.cpython-312.pyc
+/workspace/projects/backup/weekly_20260418_103758/multi_agents/__pycache__/workflow.cpython-312.pyc
+/workspace/projects/backup/weekly_20260418_103758/multi_agents/data_collector_agent.py
+/workspace/projects/backup/weekly_20260418_103758/multi_agents/decision_maker_agent.py
+/workspace/projects/backup/weekly_20260418_103758/multi_agents/dynamics_analyzer_agent.py
+/workspace/projects/backup/weekly_20260418_103758/multi_agents/sentiment_analyzer_agent.py
+/workspace/projects/backup/weekly_20260418_103758/multi_agents/structure_analyzer_agent.py
+/workspace/projects/backup/weekly_20260418_103758/multi_agents/workflow.py
+/workspace/projects/backup/weekly_20260418_103758/run_multi_agent_analysis.py
+/workspace/projects/backup/weekly_20260418_103758/tools/__init__.py
+/workspace/projects/backup/weekly_20260418_103758/tools/__pycache__/__init__.cpython-312.pyc
+/workspace/projects/backup/weekly_20260418_103758/tools/__pycache__/cross_market_tools.cpython-312.pyc
+/workspace/projects/backup/weekly_20260418_103758/tools/__pycache__/data_tools.cpython-312.pyc
+/workspace/projects/backup/weekly_20260418_103758/tools/__pycache__/huobi_tools.cpython-312.pyc
+/workspace/projects/backup/weekly_20260418_103758/tools/__pycache__/monitor_tools.cpython-312.pyc
+/workspace/projects/backup/weekly_20260418_103758/tools/__pycache__/onchain_tools.cpython-312.pyc
+/workspace/projects/backup/weekly_20260418_103758/tools/__pycache__/sentiment_tools.cpython-312.pyc
+/workspace/projects/backup/weekly_20260418_103758/tools/__pycache__/simulation_tools.cpython-312.pyc
+/workspace/projects/backup/weekly_20260418_103758/tools/cross_market_tools.py
+/workspace/projects/backup/weekly_20260418_103758/tools/data_tools.py
+/workspace/projects/backup/weekly_20260418_103758/tools/huobi_tools.py
+/workspace/projects/backup/weekly_20260418_103758/tools/monitor_tools.py
+/workspace/projects/backup/weekly_20260418_103758/tools/onchain_tools.py
+/workspace/projects/backup/weekly_20260418_103758/tools/real_trade_tools.py
+/workspace/projects/backup/weekly_20260418_103758/tools/risk_tools.py
+/workspace/projects/backup/weekly_20260418_103758/tools/sentiment_tools.py
+/workspace/projects/backup/weekly_20260418_103758/tools/simulation_tools.py
+
+备份统计:
+- 备份文件数: 9
+- 错误数: 0
+- 备份大小: 432K
