@@ -80,9 +80,18 @@ def get_btc_klines(interval: str = "4h", limit: int = 200) -> str:
         df = pd.DataFrame(klines)
         df = df.sort_values('id').reset_index(drop=True)
 
-        # 计算涨跌幅
+        # 计算涨跌幅（每根K线相对前一根）
         df['timestamp'] = pd.to_datetime(df['id'], unit='s')
         df['change'] = df['close'].pct_change() * 100
+
+        # 计算真正的24小时涨跌幅
+        # 找到24小时前的K线索引（4小时K线，24小时=6根）
+        hours_24_index = len(df) - 7 if len(df) > 7 else 0
+        if hours_24_index >= 0 and len(df) > hours_24_index:
+            price_24h_ago = df.iloc[hours_24_index]['close']
+            h24_change = (df.iloc[-1]['close'] - price_24h_ago) / price_24h_ago * 100
+        else:
+            h24_change = df['change'].iloc[-1] if len(df) > 0 else 0
 
         # 保存数据
         data_dir = "/workspace/projects/data"
@@ -98,7 +107,7 @@ def get_btc_klines(interval: str = "4h", limit: int = 200) -> str:
             "latest_price": float(df['close'].iloc[-1]),
             "highest": float(df['high'].max()),
             "lowest": float(df['low'].min()),
-            "24h_change": float(df['change'].iloc[-1]) if len(df) > 0 else 0,
+            "24h_change": float(h24_change),
             "time_range": f"{df['timestamp'].min()} ~ {df['timestamp'].max()}",
             "file_path": f"{data_dir}/BTCUSDT_{interval}_latest.csv"
         }

@@ -25,10 +25,10 @@ from multi_agents.config_manager import get_config as get_global_config, get as 
 
 # 导入智能体构建器
 from multi_agents.data_collector_agent import build_agent as build_data_collector
-from multi_agents.structure_analyzer_agent_v2 import build_agent as build_structure_analyzer  # 使用v2版本
+from multi_agents.structure_analyzer_agent_v2 import build_agent as build_structure_analyzer
 from multi_agents.dynamics_analyzer_agent import build_agent as build_dynamics_analyzer
 from multi_agents.sentiment_analyzer_agent import build_agent as build_sentiment_analyzer
-from multi_agents.decision_maker_agent import build_agent as build_decision_maker
+from multi_agents.decision_maker_agent_v3 import build_agent as build_decision_maker  # 使用v3修复版
 
 # 配置日志
 logging.basicConfig(
@@ -289,16 +289,17 @@ def build_workflow():
 def run_analysis():
     """运行多智能体协作分析（优化版本）"""
     print("="*80)
-    print("  🚀 BTC缠论多智能体协作分析系统（优化版本 v2）")
+    print("  🚀 BTC缠论多智能体协作分析系统（修复版 v3）")
     print("  数据源: 火币(HTX) API")
     print("  缠论算法: 完整实现（分型/笔/线段/中枢/买卖点）")
+    print("  决策逻辑: 已修复止盈止损方向错误")
     print("="*80)
     print("\n智能体协作架构:")
-    print("  1. 数据采集智能体 → 获取实时K线数据")
-    print("  2. 结构分析智能体（增强版）→ 缠论完整分析（分型/笔/线段/中枢/买卖点）")
+    print("  1. 数据采集智能体 → 获取实时K线数据（24h涨跌幅已修复）")
+    print("  2. 结构分析智能体（v2）→ 缠论完整分析（分型/笔/线段/中枢/买卖点）")
     print("  3. 动力学分析智能体 → 分析动量、RSI、MACD等")
     print("  4. 市场情绪智能体 → 分析恐惧贪婪指数")
-    print("  5. 决策制定智能体 → 综合评分并制定决策")
+    print("  5. 决策制定智能体（v3）→ 综合评分并制定决策（止盈止损已修复）")
     print("\n优化功能:")
     print("  ✅ 并行执行 - 提升效率")
     print("  ✅ 数据缓存 - 减少API调用")
@@ -306,6 +307,12 @@ def run_analysis():
     print("  ✅ 错误处理 - 提升可靠性")
     print("  ✅ 配置管理 - 灵活可配置")
     print("  ✅ 完整缠论 - 分型/笔/线段/中枢/买卖点")
+    print("  ✅ 正确决策 - 止盈止损方向已修复")
+    print("\n修复内容:")
+    print("  🐛 修复决策制定字段名称不匹配")
+    print("  🐛 修复止盈止损方向错误")
+    print("  🐛 修复24小时涨跌幅计算")
+    print("  🐛 添加缠论买卖点评分因子")
     print("\n" + "-"*80)
 
     # 构建工作流
