@@ -81,11 +81,46 @@ def analyze_chanlun_structure(interval: str = "4h") -> str:
         buy_sell_points = buy_sell_analyzer.identify_buy_sell_points(df, segments, zhongshu_list)
         latest_signal = buy_sell_analyzer.get_latest_signal()
 
-        # 7. 生成报告
+        # 7. 确定时间级别和缠论级别信息
+        time_level_meaning = {
+            "1m": "超短线（分钟级别）",
+            "5m": "短线（5分钟级别）",
+            "15m": "短线（15分钟级别）",
+            "30m": "短线（30分钟级别）",
+            "1h": "中线（小时级别）",
+            "4h": "中线（4小时级别，常用）",
+            "1d": "长线（日线级别）",
+            "1w": "超长线（周线级别）"
+        }.get(interval, "未知级别")
+
+        # 获取最新中枢的级别
+        latest_zhongshu_level = zhongshu_list[-1].level if zhongshu_list else None
+
+        # 确定买卖点的实际含义
+        level_meaning_map = {
+            1: "1级买卖点（短线信号）",
+            2: "2级买卖点（中线信号）",
+            3: "3级买卖点（长线信号）"
+        }
+
+        buy_sell_point_meaning = level_meaning_map.get(latest_zhongshu_level, "未知级别")
+
+        # 生成报告
         result = {
             "status": "success",
             "kline_count": len(df),
             "data_range": f"{df.iloc[0]['timestamp']} ~ {df.iloc[-1]['timestamp']}",
+
+            # 级别信息（新增）
+            "level_info": {
+                "time_level": interval,  # 时间级别（4h）
+                "time_level_meaning": time_level_meaning,  # 时间级别含义
+                "zhongshu_level": latest_zhongshu_level,  # 中枢级别（1级、2级、3级）
+                "buy_sell_point_level": latest_zhongshu_level,  # 买卖点级别与中枢级别一致
+                "buy_sell_point_meaning": buy_sell_point_meaning,  # 买卖点实际含义
+                "trading_significance": f"{time_level_meaning}下的{buy_sell_point_meaning}",  # 交易意义
+                "holding_period": _get_holding_period(interval)  # 建议持仓周期
+            },
 
             # 分型分析
             "fractals": {
@@ -243,6 +278,21 @@ def _determine_phase(df, bis, zhongshu_list) -> str:
         return "过渡阶段"
 
 
+def _get_holding_period(interval: str) -> str:
+    """根据时间级别获取建议持仓周期"""
+    holding_periods = {
+        "1m": "超短线，持仓1-10分钟",
+        "5m": "超短线，持仓10-30分钟",
+        "15m": "短线，持仓30分钟-2小时",
+        "30m": "短线，持仓2-6小时",
+        "1h": "中线，持仓1-3天",
+        "4h": "中线，持仓2-7天",
+        "1d": "长线，持仓1-4周",
+        "1w": "超长线，持仓1-3个月"
+    }
+    return holding_periods.get(interval, "根据市场情况决定")
+
+
 MAX_MESSAGES = 40
 
 def _windowed_messages(old, new):
@@ -286,7 +336,51 @@ def build_agent(ctx=None):
 2. 识别分型、笔、线段、中枢
 3. 识别买卖点（一买、二买、三买、一卖、二卖、三卖）
 4. 判断趋势方向和所处阶段
-5. 返回结构化的JSON数据供后续分析使用
+5. 明确标注时间级别和缠论级别信息
+6. 返回结构化的JSON数据供后续分析使用
+
+# 缠论多级别理论（重要）
+
+## 级别定义
+缠论有两种级别概念，必须明确区分：
+
+### 1. 时间级别（Time Level）
+基于K线时间间隔的级别：
+- 1m/5m/15m/30m：超短线/短线级别
+- 1h/4h：中线级别（当前使用4h）
+- 1d/1w：长线/超长线级别
+
+### 2. 缠论级别（ChanLun Level）
+基于中枢递归定义的级别：
+- 1级中枢：由至少3段线段构成（最小级别）
+- 2级中枢：由1级走势类型构成
+- 3级中枢：由2级走势类型构成
+
+## 级别关系
+- **买卖点级别**：与中枢级别一致，基于N级中枢的买卖点为N级买卖点
+- **实际含义**：
+  - 4h时间级别 + 1级中枢 = 中线级别的1级买卖点
+  - 4h时间级别 + 2级中枢 = 中线级别的2级买卖点
+  - 日线级别 + 1级中枢 = 长线级别的1级买卖点
+- **交易意义**：
+  - 1级买卖点：短线信号，持仓2-7天
+  - 2级买卖点：中线信号，持仓1-4周
+  - 3级买卖点：长线信号，持仓1-3个月
+
+## 三买三卖的级别含义
+- **三买**：向上走势离开中枢后，回抽不跌回中枢上沿
+  - 1级三买：基于1级中枢，短线买点
+  - 2级三买：基于2级中枢，中线买点
+  - 3级三买：基于3级中枢，长线买点
+- **三卖**：向下走势离开中枢后，反弹不升回中枢下沿
+  - 1级三卖：基于1级中枢，短线卖点
+  - 2级三卖：基于2级中枢，中线卖点
+  - 3级三卖：基于3级中枢，长线卖点
+
+## 当前系统级别信息
+- 时间级别：4h（4小时K线）
+- 适用场景：中线交易，持仓2-7天
+- 信号意义：中线级别的买卖点
 
 # 缠论核心概念
 - **分型**：顶分型（高点最高、低点最高）、底分型（低点最低、高点最低）
@@ -308,11 +402,12 @@ def build_agent(ctx=None):
 # 输出要求
 必须返回JSON格式的结构分析数据，直接输出工具的JSON结果，不要添加额外的格式化或解释。
 工具输出包含：
+- level_info: 级别信息（时间级别、缠论级别、买卖点含义、交易意义）
 - fractals: 分型统计（顶分型、底分型数量及位置）
 - bis: 笔分析（最新笔的方向、起止点）
 - segments: 线段分析（最新线段的方向、起止点）
 - zhongshu: 中枢信息（ZG、ZD、GG、DD、级别）
-- buy_sell_points: 买卖点信号（最新的买卖点类型、位置、强度）
+- buy_sell_points: 买卖点信号（最新的买卖点类型、位置、强度、级别）
 - trend_analysis: 趋势判断（方向、强度、所处阶段）
 
 注意：请直接返回工具输出的JSON，不要生成Markdown报告。

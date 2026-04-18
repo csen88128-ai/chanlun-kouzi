@@ -1,0 +1,154 @@
+{
+  "data_result": {
+    "status": "success",
+    "latest_price": 77131.03,
+    "highest": 78316.0,
+    "lowest": 65000.0,
+    "h24_change": 2.76,
+    "time_range": "2026-03-16 00:00:00 ~ 2026-04-18 04:00:00",
+    "file_path": "/workspace/projects/data/BTCUSDT_4h_latest.csv",
+    "timestamp": "2026-04-18T04:00:00Z"
+  },
+  "structure_result": {
+    "status": "success",
+    "kline_count": 200,
+    "data_range": "2026-03-16 00:00:00 ~ 2026-04-18 04:00:00",
+    "level_info": {
+      "time_level": "4h",
+      "time_level_meaning": "中线（4小时级别，常用）",
+      "zhongshu_level": 1,
+      "buy_sell_point_level": 1,
+      "buy_sell_point_meaning": "1级买卖点（短线信号）",
+      "trading_significance": "中线（4小时级别，常用）下的1级买卖点（短线信号）",
+      "holding_period": "中线，持仓2-7天"
+    },
+    "fractals": {
+      "total_count": 30,
+      "top_count": 14,
+      "bottom_count": 16,
+      "latest_top": {
+        "index": 196,
+        "price": 78316.0
+      },
+      "latest_bottom": {
+        "index": 179,
+        "price": 73811.54
+      }
+    },
+    "bis": {
+      "total_count": 14,
+      "up_count": 6,
+      "down_count": 8,
+      "latest_bi": {
+        "direction": "down",
+        "start_price": 73443.1,
+        "end_price": 70553.52,
+        "high": 73793.1,
+        "low": 70515.36
+      }
+    },
+    "segments": {
+      "total_count": 4,
+      "up_count": 2,
+      "down_count": 2,
+      "latest_segment": {
+        "direction": "down",
+        "start_price": 72008.99,
+        "end_price": 67726.99,
+        "high": 72008.99,
+        "low": 66275.23
+      }
+    },
+    "zhongshu": {
+      "total_count": 1,
+      "latest": {
+        "zg": 71351.73,
+        "zd": 68794.32,
+        "gg": 76000.0,
+        "dd": 67400.0,
+        "level": 1,
+        "segment_count": 3
+      },
+      "all_zhongshu": [
+        {
+          "zg": 71351.73,
+          "zd": 68794.32,
+          "gg": 76000.0,
+          "dd": 67400.0,
+          "level": 1,
+          "segment_count": 3
+        }
+      ]
+    },
+    "buy_sell_points": {
+      "total_count": 6,
+      "latest_signal": {
+        "type": "三买",
+        "index": 138,
+        "price": 71235.67,
+        "level": 1,
+        "strength": 0.8,
+        "is_buy": true
+      },
+      "all_signals": [
+        {
+          "type": "一卖",
+          "index": 58,
+          "price": 71736.83,
+          "level": 1,
+          "strength": 0.9
+        },
+        {
+          "type": "二卖",
+          "index": 59,
+          "price": 71598.73,
+          "level": 1,
+          "strength": 0.7
+        },
+        {
+          "type": "一买",
+          "index": 66,
+          "price": 68540.68,
+          "level": 1,
+          "strength": 0.9
+        },
+        {
+          "type": "三卖",
+          "index": 68,
+          "price": 68625.12,
+          "level": 1,
+          "strength": 0.8
+        },
+        {
+          "type": "三买",
+          "index": 138,
+          "price": 71235.67,
+          "level": 1,
+          "strength": 0.8
+        }
+      ]
+    },
+    "trend_analysis": {
+      "direction": "下降",
+      "strength": 0.5,
+      "phase": "突破上涨"
+    }
+  },
+  "level_info": {
+    "time_level": "4h",
+    "time_level_meaning": "中线（4小时级别，常用）",
+    "zhongshu_level": 1,
+    "buy_sell_point_level": 1,
+    "buy_sell_point_meaning": "1级买卖点（短线信号）",
+    "trading_significance": "中线（4小时级别，常用）下的1级买卖点（短线信号）",
+    "holding_period": "中线，持仓2-7天"
+  },
+  "latest_signal": {
+    "type": "三买",
+    "index": 138,
+    "price": 71235.67,
+    "level": 1,
+    "strength": 0.8,
+    "is_buy": true
+  }
+}
