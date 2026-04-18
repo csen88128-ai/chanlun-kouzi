@@ -1,0 +1,10 @@
+{
+  "timestamp": "2026-04-18T12:26:25.246321",
+  "supervisor_report": {
+    "total_steps": 0,
+    "final_status": "未完成",
+    "can_proceed": false,
+    "validation_chain": []
+  },
+  "details": []
+}
