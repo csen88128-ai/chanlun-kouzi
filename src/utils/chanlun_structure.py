@@ -70,6 +70,8 @@ class ZhongShu:
     high_point: float             # 中枢高点（GG）
     low_point: float              # 中枢低点（DD）
     level: int                    # 中枢级别
+    start_index: int = 0          # 起始K线索引
+    end_index: int = 0            # 结束K线索引
 
 
 class ChanLunAnalyzer:
@@ -210,11 +212,12 @@ class ChanLunAnalyzer:
 
     def identify_segments(self, bis: List[Bi]) -> List[Segment]:
         """
-        识别线段
+        识别线段（简化版）
 
         缠论线段定义：
-        - 向上线段：高点不断创新高，至少由三笔构成
-        - 向下线段：低点不断创新低，至少由三笔构成
+        - 至少由3笔构成
+        - 简化识别：每3笔作为一个潜在线段
+        - 判断方向：第一笔和最后一笔的方向决定线段方向
 
         Args:
             bis: 笔列表
@@ -226,42 +229,47 @@ class ChanLunAnalyzer:
             return []
 
         segments = []
-        current_segment_bis = [bis[0]]
 
-        for i in range(1, len(bis)):
-            current_bi = bis[i]
-            last_bi = current_segment_bis[-1]
+        # 每隔3笔尝试识别一个线段
+        for i in range(0, len(bis) - 2, 3):
+            # 取3笔
+            segment_bis = bis[i:i+3]
 
-            # 检查方向是否一致
-            if current_bi.direction == last_bi.direction:
-                # 方向一致，检查是否突破
-                if current_bi.direction == BiDirection.UP:
-                    # 向上笔：高点是否创新高
-                    if current_bi.high > last_bi.high:
-                        current_segment_bis.append(current_bi)
-                    else:
-                        # 没有创新高，可能结束线段
-                        if len(current_segment_bis) >= 3:
-                            segments.append(self._create_segment(current_segment_bis))
-                        current_segment_bis = [current_bi]
+            # 判断方向
+            first_bi = segment_bis[0]
+            last_bi = segment_bis[-1]
+
+            # 根据第一笔和最后一笔判断方向
+            if first_bi.direction == BiDirection.UP and last_bi.direction == BiDirection.UP:
+                # 向上笔开始，向上笔结束
+                if last_bi.high > first_bi.high:
+                    direction = SegmentDirection.UP
+                elif last_bi.high < first_bi.high:
+                    direction = SegmentDirection.DOWN
                 else:
-                    # 向下笔：低点是否创新低
-                    if current_bi.low < last_bi.low:
-                        current_segment_bis.append(current_bi)
-                    else:
-                        # 没有创新低，可能结束线段
-                        if len(current_segment_bis) >= 3:
-                            segments.append(self._create_segment(current_segment_bis))
-                        current_segment_bis = [current_bi]
-            else:
-                # 方向改变，可能结束当前线段
-                if len(current_segment_bis) >= 3:
-                    segments.append(self._create_segment(current_segment_bis))
-                current_segment_bis = [current_bi]
+                    continue
+            elif first_bi.direction == BiDirection.DOWN and last_bi.direction == BiDirection.DOWN:
+                # 向下笔开始，向下笔结束
+                if last_bi.low < first_bi.low:
+                    direction = SegmentDirection.DOWN
+                elif last_bi.low > first_bi.low:
+                    direction = SegmentDirection.UP
+                else:
+                    continue
+            elif first_bi.direction == BiDirection.UP and last_bi.direction == BiDirection.DOWN:
+                # 向上笔开始，向下笔结束 - 比较价格变化
+                if last_bi.low < first_bi.start_price:
+                    direction = SegmentDirection.DOWN
+                else:
+                    continue
+            else:  # DOWN -> UP
+                # 向下笔开始，向上笔结束 - 比较价格变化
+                if last_bi.high > first_bi.start_price:
+                    direction = SegmentDirection.UP
+                else:
+                    continue
 
-        # 处理最后一个线段
-        if len(current_segment_bis) >= 3:
-            segments.append(self._create_segment(current_segment_bis))
+            segments.append(self._create_segment(segment_bis))
 
         self.segments = segments
         return segments
@@ -323,13 +331,24 @@ class ChanLunAnalyzer:
                 gg = max(seg1.high, seg2.high, seg3.high)
                 dd = min(seg1.low, seg2.low, seg3.low)
 
+                # 计算中枢的起始和结束索引
+                all_bis = [b for seg in [seg1, seg2, seg3] for b in seg.bi_list]
+                if all_bis:
+                    start_index = min(b.start_index for b in all_bis)
+                    end_index = max(b.end_index for b in all_bis)
+                else:
+                    start_index = 0
+                    end_index = 0
+
                 zhongshu = ZhongShu(
                     segment_list=[seg1, seg2, seg3],
                     high=zg,
                     low=zd,
                     high_point=gg,
                     low_point=dd,
-                    level=1  # 简化处理，都当作1级中枢
+                    level=1,  # 简化处理，都当作1级中枢
+                    start_index=start_index,
+                    end_index=end_index
                 )
 
                 zhongshu_list.append(zhongshu)
