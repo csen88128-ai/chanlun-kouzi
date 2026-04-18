@@ -1,5 +1,5 @@
 """
-Agent池模块 - 实现Agent复用
+Agent池模块 - 实现Agent复用（修复版）
 """
 import logging
 from typing import Dict, Any, Optional, Callable
@@ -13,6 +13,7 @@ class AgentPool:
     """Agent池，用于管理和复用Agent实例"""
 
     _instances: Dict[str, Any] = {}
+    _builders: Dict[str, Callable] = {}  # 保存构建器
     _configs: Dict[str, Dict[str, Any]] = {}
 
     @classmethod
@@ -30,26 +31,42 @@ class AgentPool:
             agent_builder: Agent构建函数
             config: Agent配置
         """
+        if agent_builder:
+            cls._builders[agent_type] = agent_builder
         cls._configs[agent_type] = config or {}
         logger.info(f"注册Agent: {agent_type}")
 
     @classmethod
-    def get_agent(cls, agent_type: str) -> Optional[Any]:
+    def get_agent(cls, agent_type: str) -> Any:
         """
-        获取Agent实例（复用已创建的实例）
+        获取Agent实例（如果不存在则自动创建）
 
         Args:
             agent_type: Agent类型标识
 
         Returns:
-            Agent实例，如果不存在则返回None
+            Agent实例
         """
-        if agent_type not in cls._instances:
-            logger.debug(f"Agent {agent_type} 尚未初始化")
-            return None
+        # 如果已存在，直接返回
+        if agent_type in cls._instances:
+            logger.debug(f"复用Agent实例: {agent_type}")
+            return cls._instances[agent_type]
 
-        logger.debug(f"复用Agent实例: {agent_type}")
-        return cls._instances[agent_type]
+        # 如果不存在，尝试创建
+        if agent_type not in cls._builders:
+            raise ValueError(f"Agent {agent_type} 未注册构建器，请先调用register_agent")
+
+        logger.info(f"创建新Agent实例: {agent_type}")
+        builder = cls._builders[agent_type]
+
+        try:
+            agent = builder()
+            cls._instances[agent_type] = agent
+            logger.info(f"Agent {agent_type} 创建成功")
+            return agent
+        except Exception as e:
+            logger.error(f"创建Agent失败 {agent_type}: {e}")
+            raise
 
     @classmethod
     def create_agent(
@@ -69,6 +86,9 @@ class AgentPool:
         Returns:
             Agent实例
         """
+        # 注册构建器
+        cls.register_agent(agent_type, agent_builder)
+
         # 如果已存在且不强制重建，直接返回
         if not force_rebuild and agent_type in cls._instances:
             logger.info(f"复用Agent实例: {agent_type}")
@@ -79,26 +99,28 @@ class AgentPool:
         try:
             agent = agent_builder()
             cls._instances[agent_type] = agent
-            cls.register_agent(agent_type, agent_builder)
             return agent
         except Exception as e:
             logger.error(f"构建Agent失败 {agent_type}: {e}")
             raise
 
     @classmethod
-    def rebuild_agent(cls, agent_type: str, agent_builder: Callable) -> Any:
+    def rebuild_agent(cls, agent_type: str) -> Any:
         """
         重建Agent实例
 
         Args:
             agent_type: Agent类型标识
-            agent_builder: Agent构建函数
 
         Returns:
             新的Agent实例
         """
         logger.info(f"重建Agent: {agent_type}")
-        return cls.create_agent(agent_type, agent_builder, force_rebuild=True)
+
+        if agent_type not in cls._builders:
+            raise ValueError(f"Agent {agent_type} 未注册构建器")
+
+        return cls.create_agent(agent_type, cls._builders[agent_type], force_rebuild=True)
 
     @classmethod
     def remove_agent(cls, agent_type: str):
@@ -116,14 +138,16 @@ class AgentPool:
     def clear_all(cls):
         """清空所有Agent实例"""
         cls._instances.clear()
+        cls._builders.clear()
         cls._configs.clear()
-        logger.info("清空所有Agent实例")
+        logger.info("清空所有Agent实例和配置")
 
     @classmethod
     def get_stats(cls) -> Dict[str, Any]:
         """获取Agent池统计信息"""
         return {
             "total_agents": len(cls._instances),
+            "registered_builders": len(cls._builders),
             "agent_types": list(cls._instances.keys()),
             "configs": cls._configs
         }
@@ -141,11 +165,24 @@ class AgentPool:
         """
         return agent_type in cls._instances
 
+    @classmethod
+    def is_registered(cls, agent_type: str) -> bool:
+        """
+        检查Agent是否已注册
+
+        Args:
+            agent_type: Agent类型标识
+
+        Returns:
+            True如果已注册，否则False
+        """
+        return agent_type in cls._builders
+
 
 # 便捷函数
 def get_or_create_agent(
     agent_type: str,
-    agent_builder: Callable,
+    agent_builder: Optional[Callable] = None,
     force_rebuild: bool = False
 ) -> Any:
     """
@@ -153,13 +190,16 @@ def get_or_create_agent(
 
     Args:
         agent_type: Agent类型标识
-        agent_builder: Agent构建函数
+        agent_builder: Agent构建函数（可选）
         force_rebuild: 是否强制重建
 
     Returns:
         Agent实例
     """
-    return AgentPool.create_agent(agent_type, agent_builder, force_rebuild)
+    if agent_builder:
+        AgentPool.register_agent(agent_type, agent_builder)
+
+    return AgentPool.get_agent(agent_type)
 
 
 def warm_up_agents(agent_builders: Dict[str, Callable]):

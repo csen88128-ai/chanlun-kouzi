@@ -1,0 +1,16 @@
+{
+  "basic": true,
+  "performance": {
+    "first_call_time": 1.0003798007965088,
+    "second_call_time": 5.245208740234375e-06,
+    "time_saved": 1.0003745555877686,
+    "speedup": 190722.5909090909
+  },
+  "hit_rate": {
+    "total_requests": 10,
+    "hits": 9,
+    "misses": 1,
+    "hit_rate": 90.0
+  },
+  "json": true
+}
