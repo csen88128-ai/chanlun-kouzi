@@ -121,7 +121,7 @@ class CompleteMultiAgentWorkflow:
         data_30m = self.chanlun_analyzer.all_data.get('30m', {})
 
         # 检查数据格式
-        if data_30m and isinstance(data_30m, dict) and 'timestamp' in data_30m:
+        if data_30m is not None and isinstance(data_30m, dict) and 'timestamp' in data_30m:
             # 数据格式是字典，需要转换为DataFrame
             df_30m = pd.DataFrame(data_30m)
         elif isinstance(data_30m, pd.DataFrame):
@@ -173,7 +173,7 @@ class CompleteMultiAgentWorkflow:
         data_30m = self.chanlun_analyzer.all_data.get('30m', {})
 
         # 检查数据格式
-        if data_30m and isinstance(data_30m, dict) and 'timestamp' in data_30m:
+        if data_30m is not None and isinstance(data_30m, dict) and 'timestamp' in data_30m:
             # 数据格式是字典，需要转换为DataFrame
             df_30m = pd.DataFrame(data_30m)
         elif isinstance(data_30m, pd.DataFrame):
@@ -258,7 +258,7 @@ class CompleteMultiAgentWorkflow:
         # 使用30分钟级别的最新价格
         data_30m = self.chanlun_analyzer.all_data.get('30m', {})
 
-        if data_30m and 'close' in data_30m:
+        if data_30m is not None and isinstance(data_30m, dict) and 'close' in data_30m:
             # 数据格式是字典
             close_data = data_30m['close']
             if isinstance(close_data, list) and len(close_data) > 0:
@@ -267,7 +267,7 @@ class CompleteMultiAgentWorkflow:
         # 如果没有30分钟数据，使用5分钟数据
         data_5m = self.chanlun_analyzer.all_data.get('5m', {})
 
-        if data_5m and 'close' in data_5m:
+        if data_5m is not None and isinstance(data_5m, dict) and 'close' in data_5m:
             close_data = data_5m['close']
             if isinstance(close_data, list) and len(close_data) > 0:
                 return float(close_data[-1])
