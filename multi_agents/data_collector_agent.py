@@ -3,6 +3,7 @@
 数据采集智能体 - 使用火币API获取BTC数据
 """
 import json
+import sys
 from langchain_openai import ChatOpenAI
 from langchain.agents import create_agent
 from langchain_core.messages import HumanMessage
@@ -13,9 +14,14 @@ from langgraph.graph.message import add_messages
 from langchain_core.messages import AnyMessage
 import os
 
+# 添加路径
+sys.path.insert(0, '/workspace/projects')
+sys.path.insert(0, '/workspace/projects/src')
+
 from coze_coding_utils.log.write_log import request_context
 from coze_coding_utils.runtime_ctx.context import new_context
 from coze_coding_utils.runtime_ctx.context import default_headers
+from storage.memory.memory_saver import get_memory_saver
 
 
 # 火币API工具
@@ -171,5 +177,6 @@ def build_agent(ctx=None):
         model=llm,
         system_prompt=system_prompt,
         tools=[get_btc_klines],
+        checkpointer=get_memory_saver(),
         state_schema=AgentState,
     )

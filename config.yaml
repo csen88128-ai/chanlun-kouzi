@@ -1,0 +1,194 @@
+# 缠论多智能体分析系统配置文件
+
+analysis:
+  # 分析配置
+  default_interval: "4h"        # 默认K线周期
+  default_limit: 200            # 默认K线数量
+  symbol: "BTCUSDT"             # 默认交易对
+
+  # 可用的时间周期
+  intervals:
+    short_term: "1h"            # 短期分析
+    medium_term: "4h"           # 中期分析
+    long_term: "1d"             # 长期分析
+
+  # 数据源配置
+  data_source: "huobi"          # 数据源：huobi/binance
+
+api:
+  # API配置
+  timeout: 10                   # 请求超时（秒）
+  retries: 3                    # 重试次数
+  retry_delay: 1.0              # 重试延迟（秒）
+  retry_backoff: 2.0            # 退避因子
+
+  # 连接池配置
+  pool_connections: 10          # 连接池大小
+  pool_maxsize: 20              # 最大连接数
+  pool_block: false             # 连接池是否阻塞
+
+cache:
+  # 缓存配置
+  enabled: true                 # 是否启用缓存
+  ttl_minutes: 5                # 缓存过期时间（分钟）
+  max_size: 100                 # 最大缓存条目数
+
+  # 数据缓存配置
+  kline_cache_ttl: 5            # K线数据缓存时间（分钟）
+  sentiment_cache_ttl: 30       # 情绪数据缓存时间（分钟）
+
+scoring:
+  # 评分配置
+  weights:
+    trend: 0.30                 # 趋势因子权重
+    rsi: 0.20                   # RSI因子权重
+    macd: 0.20                  # MACD因子权重
+    price_position: 0.15        # 价格位置权重
+    sentiment: 0.15             # 市场情绪权重
+
+  # 决策阈值
+  thresholds:
+    strong_buy: 85              # 强烈买入阈值
+    buy: 70                     # 买入阈值
+    hold_upper: 69              # 持有上限
+    hold_lower: 46              # 持有下限
+    sell: 45                    # 卖出阈值
+    strong_sell: 30             # 强烈卖出阈值
+
+  # RSI阈值
+  rsi:
+    overbought: 70              # 超买阈值
+    oversold: 30                # 超卖阈值
+
+  # MACD配置
+  macd:
+    fast_period: 12             # 快线周期
+    slow_period: 26             # 慢线周期
+    signal_period: 9            # 信号线周期
+
+  # 价格位置配置
+  price_position:
+    low_threshold: 20           # 低位阈值（%）
+    high_threshold: 80          # 高位阈值（%）
+
+# 智能体配置
+agents:
+  data_collector:
+    enabled: true
+    timeout: 15
+
+  structure_analyzer:
+    enabled: true
+    timeout: 10
+
+  dynamics_analyzer:
+    enabled: true
+    timeout: 10
+
+  sentiment_analyzer:
+    enabled: true
+    timeout: 10
+
+  decision_maker:
+    enabled: true
+    timeout: 10
+
+# 工作流配置
+workflow:
+  # 执行模式：serial（串行）或 parallel（并行）
+  execution_mode: "parallel"
+
+  # 并行配置
+  parallel_nodes:
+    - structure_analyzer
+    - dynamics_analyzer
+    - sentiment_analyzer
+
+  # 超时配置
+  timeout: 120                 # 整个工作流超时（秒）
+
+  # 错误处理
+  continue_on_error: true      # 遇到错误是否继续
+  max_agent_retries: 3         # Agent最大重试次数
+
+# 日志配置
+logging:
+  level: "INFO"                 # 日志级别：DEBUG/INFO/WARNING/ERROR
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/analysis.log"     # 日志文件路径
+
+  # 控制台日志
+  console:
+    enabled: true
+    level: "INFO"
+
+  # 文件日志
+  file:
+    enabled: true
+    level: "DEBUG"
+    max_size: 10485760          # 10MB
+    backup_count: 5             # 保留5个备份
+
+# 通知配置
+notifications:
+  enabled: false                # 是否启用通知
+
+  # 告警规则
+  alerts:
+    - type: "high_score"
+      condition: "score > 85"
+      message: "强烈买入信号"
+
+    - type: "low_score"
+      condition: "score < 30"
+      message: "强烈卖出信号"
+
+    - type: "rsi_overbought"
+      condition: "rsi > 80"
+      message: "RSI极度超买"
+
+    - type: "rsi_oversold"
+      condition: "rsi < 20"
+      message: "RSI极度超卖"
+
+# 数据存储配置
+storage:
+  # 数据库配置
+  database:
+    enabled: false
+    path: "data/analysis_history.db"
+
+  # CSV导出配置
+  csv_export:
+    enabled: true
+    path: "data/analysis_results.csv"
+
+  # JSON导出配置
+  json_export:
+    enabled: true
+    path: "data/analysis_results.json"
+    pretty: true
+
+# 性能配置
+performance:
+  # 并发配置
+  max_concurrent_agents: 3      # 最大并发Agent数
+
+  # 缓存优化
+  enable_agent_caching: true    # 启用Agent缓存
+
+  # 连接复用
+  enable_connection_pool: true  # 启用连接池
+
+# 安全配置
+security:
+  # API密钥
+  api_keys:
+    huobi: ""                   # 火币API密钥
+    binance: ""                 # 币安API密钥
+
+  # 限流配置
+  rate_limit:
+    enabled: true
+    requests_per_minute: 60     # 每分钟最大请求数
+    requests_per_hour: 1000     # 每小时最大请求数

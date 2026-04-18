@@ -3,6 +3,9 @@
 动力学分析智能体 - 动量、波动性、成交量分析
 """
 import json
+import sys
+sys.path.insert(0, '/workspace/projects')
+sys.path.insert(0, '/workspace/projects/src')
 import pandas as pd
 from langchain_openai import ChatOpenAI
 from langchain.agents import create_agent
@@ -16,6 +19,7 @@ import os
 from coze_coding_utils.log.write_log import request_context
 from coze_coding_utils.runtime_ctx.context import new_context
 from coze_coding_utils.runtime_ctx.context import default_headers
+from storage.memory.memory_saver import get_memory_saver
 
 
 @tool
@@ -151,5 +155,6 @@ def build_agent(ctx=None):
         model=llm,
         system_prompt=system_prompt,
         tools=[analyze_dynamics],
+        checkpointer=get_memory_saver(),
         state_schema=AgentState,
     )
