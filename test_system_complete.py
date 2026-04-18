@@ -13,7 +13,7 @@ sys.path.insert(0, '/workspace/projects/src')
 
 from multi_agents.knowledge_manager import KnowledgeManager
 from multi_agents.skill_evaluator import SkillEvaluator
-from multi_agents.execution_monitor import ExecutionMonitor
+from multi_agents.execution_monitor import ExecutionMonitor, ExecutionStatus
 from multi_agents.self_improvement_engine import SelfImprovementEngine
 from multi_agents.meta_agent import MetaAgent
 from multi_agents.data_validator import DataValidator
@@ -77,9 +77,10 @@ def test_execution_monitor():
 
     # 记录一次执行
     print("记录模拟执行...")
+    from multi_agents.execution_monitor import ExecutionStatus
     record = em.record_execution(
         agent_type="test_agent",
-        status=em.ExecutionStatus.SUCCESS,
+        status=ExecutionStatus.SUCCESS,
         execution_time=5.5,
         input_data="测试输入",
         output_data="测试输出",

@@ -45,7 +45,21 @@ class SkillEvaluator:
         try:
             with open(self.metrics_file, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-                self.metrics = [SkillMetric(**item) for item in data]
+                # 将字符串level转换回枚举
+                self.metrics = []
+                for item in data:
+                    item_copy = item.copy()
+                    if 'level' in item_copy and isinstance(item_copy['level'], str):
+                        # 根据字符串值创建枚举
+                        level_map = {
+                            "专家": SkillLevel.EXPERT,
+                            "高级": SkillLevel.ADVANCED,
+                            "中级": SkillLevel.INTERMEDIATE,
+                            "初级": SkillLevel.BEGINNER,
+                            "新手": SkillLevel.NOVICE
+                        }
+                        item_copy['level'] = level_map.get(item_copy['level'], SkillLevel.BEGINNER)
+                    self.metrics.append(SkillMetric(**item_copy))
         except FileNotFoundError:
             self._initialize_metrics()
         except Exception as e:

@@ -29,7 +29,7 @@ from multi_agents.logic_validator import LogicValidator
 from multi_agents.execution_monitor import ExecutionMonitor, ExecutionStatus
 from multi_agents.meta_agent import MetaAgent
 from multi_agents.agent_pool import AgentPool
-from multi_agents.cache import Cache
+from multi_agents.cache import DataCache
 
 
 class WorkflowState(TypedDict):
@@ -72,11 +72,11 @@ class OptimizedWorkflow:
         self.agent_pool = AgentPool()
 
         # 注册智能体
-        self.agent_pool.register("data_collector", build_data_collector)
-        self.agent_pool.register("structure_analyzer", build_structure_analyzer)
-        self.agent_pool.register("dynamics_analyzer", build_dynamics_analyzer)
-        self.agent_pool.register("sentiment_analyzer", build_sentiment_analyzer)
-        self.agent_pool.register("decision_maker", build_decision_maker)
+        self.agent_pool.register_agent("data_collector", build_data_collector)
+        self.agent_pool.register_agent("structure_analyzer", build_structure_analyzer)
+        self.agent_pool.register_agent("dynamics_analyzer", build_dynamics_analyzer)
+        self.agent_pool.register_agent("sentiment_analyzer", build_sentiment_analyzer)
+        self.agent_pool.register_agent("decision_maker", build_decision_maker)
 
         # 初始化验证器
         self.data_validator = DataValidator()
@@ -87,7 +87,7 @@ class OptimizedWorkflow:
         self.execution_monitor = ExecutionMonitor()
 
         # 初始化缓存
-        self.cache = Cache(ttl=300)  # 5分钟缓存
+        self.cache = DataCache(default_ttl_minutes=5)  # 5分钟缓存
 
         # 初始化元智能体
         self.meta_agent = MetaAgent()

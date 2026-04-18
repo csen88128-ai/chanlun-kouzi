@@ -332,7 +332,7 @@ class AutoImprovementExecutor:
         agent_metrics = [m for m in metrics if m.agent_type == agent_type]
 
         # 找到需要提升的技能
-        low_score_metrics = [m for m in agent_metrics if m.current_value < m.target_value]
+        low_score_metrics = [m for m in agent_metrics if m.value < m.improvement_target]
 
         if not low_score_metrics:
             return {
@@ -344,8 +344,8 @@ class AutoImprovementExecutor:
         improved_count = 0
         for metric in low_score_metrics[:3]:  # 每次最多优化3个
             # 提升技能水平
-            improvement = (metric.target_value - metric.current_value) * 0.3
-            metric.current_value = min(metric.current_value + improvement, metric.target_value)
+            improvement = (metric.improvement_target - metric.value) * 0.3
+            metric.value = min(metric.value + improvement, metric.improvement_target)
             improved_count += 1
 
         self.skill_evaluator._save_metrics()

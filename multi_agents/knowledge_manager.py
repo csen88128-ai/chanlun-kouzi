@@ -45,7 +45,20 @@ class KnowledgeManager:
         try:
             with open(self.knowledge_file, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-                self.knowledge_base = [KnowledgeItem(**item) for item in data]
+                # 将字符串status转换回枚举
+                self.knowledge_base = []
+                for item in data:
+                    item_copy = item.copy()
+                    if 'status' in item_copy and isinstance(item_copy['status'], str):
+                        # 根据字符串值创建枚举
+                        status_map = {
+                            "完整": KnowledgeStatus.COMPLETE,
+                            "部分": KnowledgeStatus.PARTIAL,
+                            "缺失": KnowledgeStatus.MISSING,
+                            "过期": KnowledgeStatus.OUTDATED
+                        }
+                        item_copy['status'] = status_map.get(item_copy['status'], KnowledgeStatus.MISSING)
+                    self.knowledge_base.append(KnowledgeItem(**item_copy))
         except FileNotFoundError:
             # 初始化知识库
             self._initialize_knowledge()

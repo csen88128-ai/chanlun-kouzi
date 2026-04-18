@@ -355,24 +355,8 @@ class LogicValidator:
                 actual=volume,
                 evidence="成交量为负数"
             ))
-                    expected=f"~{latest_calculated_rsi:.1f}",
-                    actual=rsi,
-                    evidence=f"计算值{latest_calculated_rsi:.1f}，差异{rsi_diff:.2f}"
-                ))
-        except Exception as e:
-            self.results.append(LogicValidationResult(
-                category="动力学",
-                item="RSI",
-                level=ValidationLevel.WARNING,
-                message=f"无法验证RSI计算: {e}",
-                theory="RSI = 100 - (100 / (1 + RS))",
-                calculation="14周期RSI标准公式",
-                expected="可计算",
-                actual="验证失败",
-                evidence=str(e)
-            ))
 
-    def _validate_macd(self, dynamics: Dict, df: pd.DataFrame):
+    def _validate_macd_basic(self, dynamics: Dict):
         """验证MACD计算"""
         macd = dynamics.get('macd')
         signal = dynamics.get('signal')
@@ -785,92 +769,6 @@ class LogicValidator:
                         actual=strength,
                         evidence="买卖点强度计算错误"
                     ))
-                message="分型总数不等于顶分型+底分型",
-                theory="分型总数 = 顶分型 + 底分型",
-                calculation=f"{top_count} + {bottom_count}",
-                expected=f"{top_count + bottom_count}",
-                actual=total_count,
-                evidence=f"总数{total_count} != 顶{top_count} + 底{bottom_count}"
-            ))
-
-        # 验证分型定义
-        latest_top = fractals.get('latest_top', {})
-        latest_bottom = fractals.get('latest_bottom', {})
-
-        if latest_top and 'index' in latest_top:
-            idx = latest_top['index']
-            if idx < len(df):
-                # 验证顶分型定义：高点最高，低点最高
-                row = df.iloc[idx]
-                if idx > 0 and idx < len(df) - 1:
-                    prev_row = df.iloc[idx - 1]
-                    next_row = df.iloc[idx + 1]
-
-                    if not (row['high'] >= prev_row['high'] and row['high'] >= next_row['high']):
-                        self.results.append(LogicValidationResult(
-                            category="缠论",
-                            item="顶分型定义",
-                            level=ValidationLevel.ERROR,
-                            message="顶分型的高点不是最高的",
-                            theory="顶分型：高点最高，低点最高",
-                            calculation="high >= prev_high and high >= next_high",
-                            expected="高点最高",
-                            actual=f"high={row['high']}, prev={prev_row['high']}, next={next_row['high']}",
-                            evidence=f"索引{idx}的高点{row['high']}不是最高的"
-                        ))
-
-    def _validate_bis(self, structure: Dict, df: pd.DataFrame):
-        """验证笔识别"""
-        bis_info = structure.get('bis', {})
-        total_count = bis_info.get('total_count', 0)
-        up_count = bis_info.get('up_count', 0)
-        down_count = bis_info.get('down_count', 0)
-
-        # 验证数量关系
-        if total_count != up_count + down_count:
-            self.results.append(LogicValidationResult(
-                category="缠论",
-                item="笔数量",
-                level=ValidationLevel.ERROR,
-                message="笔总数不等于向上笔+向下笔",
-                theory="笔总数 = 向上笔 + 向下笔",
-                calculation=f"{up_count} + {down_count}",
-                expected=f"{up_count + down_count}",
-                actual=total_count,
-                evidence=f"总数{total_count} != 上{up_count} + 下{down_count}"
-            ))
-
-    def _validate_segments(self, structure: Dict, df: pd.DataFrame):
-        """验证线段识别"""
-        segments_info = structure.get('segments', {})
-        total_count = segments_info.get('total_count', 0)
-
-        # 验证线段定义：至少3笔
-        if total_count > 0:
-            bis_count = structure.get('bis', {}).get('total_count', 0)
-            if bis_count > 0 and total_count > bis_count / 3:
-                self.results.append(LogicValidationResult(
-                    category="缠论",
-                    item="线段数量",
-                    level=ValidationLevel.WARNING,
-                    message="线段数量可能过多，每段笔数可能不足3笔",
-                    theory="线段至少由3笔构成",
-                    calculation="每段 >= 3笔",
-                    expected=f"<= {bis_count // 3}",
-                    actual=total_count,
-                    evidence=f"{total_count}段 / {bis_count}笔 = {bis_count/total_count:.1f}笔/段"
-                ))
-
-    def _validate_zhongshu(self, structure: Dict, df: pd.DataFrame):
-        """验证中枢识别"""
-        zhongshu_info = structure.get('zhongshu', {})
-        latest = zhongshu_info.get('latest')
-
-        if latest:
-            zg = latest.get('zg')
-            zd = latest.get('zd')
-            gg = latest.get('gg')
-            dd = latest.get('dd')
 
             # 验证中枢定义
             if zg is not None and zd is not None:

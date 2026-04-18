@@ -299,8 +299,8 @@ class HistoryAnalyzer:
             skill_analysis = {}
             for skill in skills:
                 agent_type = skill['agent_type']
-                current_value = skill['current_value']
-                target_value = skill['target_value']
+                current_value = skill.get('value', skill.get('current_value', 0))  # 兼容两种属性名
+                target_value = skill.get('improvement_target', skill.get('target_value', 0))  # 兼容两种属性名
                 gap = target_value - current_value
 
                 skill_analysis[agent_type] = {

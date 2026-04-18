@@ -103,7 +103,7 @@ class SelfImprovementEngine:
                 id=f"{agent_type}_skill_{datetime.now().strftime('%Y%m%d_%H%M%S')}",
                 agent_type=agent_type,
                 action_type="优化",
-                description=f"提升技能: {gap['metric_name']} (当前{gap['current_value']}, 目标{gap['target_value']})",
+                description=f"提升技能: {gap['metric_name']} (当前{gap.get('current_value', gap.get('value', 0))}, 目标{gap.get('target_value', gap.get('improvement_target', 0))})",
                 priority=Priority.CRITICAL if gap["priority"] == "高" else Priority.HIGH,
                 estimated_effort="4-8小时",
                 expected_impact=f"提升{gap['gap']}分",
