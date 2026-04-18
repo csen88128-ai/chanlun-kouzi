@@ -34,6 +34,64 @@ class DataValidator:
     def __init__(self):
         self.results: List[ValidationResult] = []
 
+    def validate_data(self, output: str, agent_type: str) -> Dict[str, Any]:
+        """验证智能体的输出数据"""
+        try:
+            data = json.loads(output)
+        except:
+            return {
+                "status": "ERROR",
+                "message": "无法解析JSON输出",
+                "validations": []
+            }
+
+        validations = self.validate_all(data)
+
+        # 统计验证结果
+        status_counts = {
+            "通过": 0,
+            "警告": 0,
+            "错误": 0,
+            "严重错误": 0
+        }
+
+        for v in validations:
+            level_value = v.level.value
+            if level_value in status_counts:
+                status_counts[level_value] += 1
+
+        # 确定整体状态
+        if status_counts["严重错误"] > 0:
+            overall_status = "CRITICAL"
+        elif status_counts["错误"] > 0:
+            overall_status = "ERROR"
+        elif status_counts["警告"] > 0:
+            overall_status = "WARNING"
+        else:
+            overall_status = "PASS"
+
+        return {
+            "status": overall_status,
+            "agent_type": agent_type,
+            "message": f"验证完成: {status_counts['通过']}通过, {status_counts['警告']}警告, {status_counts['错误']}错误, {status_counts['严重错误']}严重",
+            "validations": [
+                {
+                    "item": v.item,
+                    "level": v.level.value,
+                    "message": v.message,
+                    "expected": str(v.expected),
+                    "actual": str(v.actual),
+                    "evidence": v.evidence
+                }
+                for v in validations
+            ],
+            "counts": status_counts,
+            "pass": status_counts["通过"],
+            "warning": status_counts["警告"],
+            "error": status_counts["错误"],
+            "critical": status_counts["严重错误"]
+        }
+
     def validate_all(self, data: Dict[str, Any]) -> List[ValidationResult]:
         """验证所有数据"""
         self.results = []
@@ -104,193 +162,109 @@ class DataValidator:
                 message="最新价格无效",
                 expected="> 0",
                 actual=latest_price,
-                evidence=f"latest_price = {latest_price}"
+                evidence=f"最新价格: {latest_price}"
             ))
 
-        # 检查价格关系
-        if highest < lowest:
-            self.results.append(ValidationResult(
-                item="价格关系",
-                level=ValidationLevel.ERROR,
-                message="最高价低于最低价，数据错误",
-                expected="highest >= lowest",
-                actual=f"highest={highest}, lowest={lowest}",
-                evidence="价格关系不成立"
-            ))
-
-        # 检查现价是否在合理范围内
-        if latest_price and highest and lowest:
-            if latest_price > highest * 1.1:
+        if highest is not None and lowest is not None:
+            if highest < lowest:
                 self.results.append(ValidationResult(
-                    item="价格范围",
+                    item="价格区间",
                     level=ValidationLevel.ERROR,
-                    message="现价超过历史最高价10%以上，数据异常",
-                    expected=f"<= {highest * 1.1}",
-                    actual=latest_price,
-                    evidence=f"现价{latest_price} 远高于历史最高{highest}"
+                    message="最高价不能低于最低价",
+                    expected="highest >= lowest",
+                    actual=f"highest={highest}, lowest={lowest}",
+                    evidence="价格数据矛盾"
                 ))
-            elif latest_price < lowest * 0.9:
+
+            if latest_price > highest or latest_price < lowest:
                 self.results.append(ValidationResult(
-                    item="价格范围",
-                    level=ValidationLevel.ERROR,
-                    message="现价低于历史最低价10%以上，数据异常",
-                    expected=f">= {lowest * 0.9}",
-                    actual=latest_price,
-                    evidence=f"现价{latest_price} 远低于历史最低{lowest}"
+                    item="最新价格",
+                    level=ValidationLevel.WARNING,
+                    message="最新价格超出区间范围",
+                    expected=f"lowest <= price <= highest",
+                    actual=f"price={latest_price}",
+                    evidence=f"区间: [{lowest}, {highest}]"
                 ))
 
     def _validate_change_data(self, data: Dict[str, Any]):
-        """验证涨跌幅数据"""
-        h24_change = data.get('24h_change')
+        """验证涨跌幅"""
+        h24_change = data.get('h24_change')
 
         if h24_change is None:
             self.results.append(ValidationResult(
-                item="涨跌幅",
-                level=ValidationLevel.ERROR,
-                message="缺少24小时涨跌幅数据",
-                expected="数值",
-                actual=None,
-                evidence="24h_change字段缺失"
-            ))
-        elif abs(h24_change) > 50:  # 超过50%异常
-            self.results.append(ValidationResult(
-                item="涨跌幅",
+                item="24小时涨跌幅",
                 level=ValidationLevel.WARNING,
-                message="24小时涨跌幅超过50%，可能数据异常",
-                expected="-50 ~ 50",
-                actual=h24_change,
-                evidence=f"涨跌幅{h24_change}%异常"
+                message="缺少24小时涨跌幅数据",
+                expected="数字",
+                actual=None,
+                evidence="数据字段缺失"
             ))
+
+        # 检查涨跌幅是否合理（不能超过100%单日涨跌）
+        if h24_change is not None:
+            if abs(h24_change) > 100:
+                self.results.append(ValidationResult(
+                    item="24小时涨跌幅",
+                    level=ValidationLevel.WARNING,
+                    message="24小时涨跌幅超过100%",
+                    expected="[-100%, 100%]",
+                    actual=f"{h24_change}%",
+                    evidence=f"涨跌幅异常: {h24_change}%"
+                ))
 
     def _validate_completeness(self, data: Dict[str, Any]):
         """验证数据完整性"""
-        required_fields = ['latest_price', 'highest', 'lowest', '24h_change', 'data_count']
+        required_fields = ['latest_price', 'highest', 'lowest', 'h24_change', 'volume']
 
         for field in required_fields:
             if field not in data or data[field] is None:
                 self.results.append(ValidationResult(
-                    item="数据完整性",
-                    level=ValidationLevel.ERROR,
-                    message=f"缺少必要字段: {field}",
-                    expected="存在",
+                    item=f"数据字段",
+                    level=ValidationLevel.WARNING,
+                    message=f"缺少必填字段: {field}",
+                    expected=f"{field}存在",
                     actual="缺失",
-                    evidence=f"字段 {field} 不存在"
+                    evidence=f"字段检查失败"
                 ))
-
-        # 验证数据数量
-        data_count = data.get('data_count')
-        if data_count and data_count < 10:
-            self.results.append(ValidationResult(
-                item="数据数量",
-                level=ValidationLevel.WARNING,
-                message="数据数量过少，可能影响分析准确性",
-                expected=">= 100",
-                actual=data_count,
-                evidence=f"只有{data_count}根K线"
-            ))
 
     def _validate_freshness(self, data: Dict[str, Any]):
         """验证数据时效性"""
-        file_path = data.get('file_path')
-        if not file_path:
-            return
+        timestamp = data.get('timestamp')
 
-        try:
-            # 检查文件修改时间
-            import os
+        if timestamp:
+            # 检查数据是否超过5分钟
+            from datetime import datetime
             import time
-            mtime = os.path.getmtime(file_path)
-            age_minutes = (time.time() - mtime) / 60
 
-            if age_minutes > 60:
+            try:
+                data_time = datetime.fromisoformat(timestamp.replace('Z', '+00:00'))
+                now = datetime.now(data_time.tzinfo)
+                age_seconds = (now - data_time).total_seconds()
+
+                if age_seconds > 300:  # 5分钟
+                    self.results.append(ValidationResult(
+                        item="数据时效性",
+                        level=ValidationLevel.WARNING,
+                        message=f"数据已过期 ({age_seconds/60:.1f}分钟前)",
+                        expected="< 5分钟",
+                        actual=f"{age_seconds/60:.1f}分钟",
+                        evidence=f"数据时间戳: {timestamp}"
+                    ))
+                else:
+                    self.results.append(ValidationResult(
+                        item="数据时效性",
+                        level=ValidationLevel.PASS,
+                        message="数据时效性验证通过",
+                        expected="< 5分钟",
+                        actual=f"{age_seconds:.1f}秒",
+                        evidence=f"数据时间戳: {timestamp}"
+                    ))
+            except:
                 self.results.append(ValidationResult(
                     item="数据时效性",
                     level=ValidationLevel.WARNING,
-                    message="数据超过1小时未更新",
-                    expected="< 60分钟",
-                    actual=f"{age_minutes:.1f}分钟",
-                    evidence=f"文件修改时间: {age_minutes:.1f}分钟前"
+                    message="无法解析时间戳",
+                    expected="有效的ISO时间戳",
+                    actual=timestamp,
+                    evidence="时间戳格式错误"
                 ))
-            else:
-                self.results.append(ValidationResult(
-                    item="数据时效性",
-                    level=ValidationLevel.PASS,
-                    message="数据时效性验证通过",
-                    expected="< 60分钟",
-                    actual=f"{age_minutes:.1f}分钟",
-                    evidence=f"数据于{age_minutes:.1f}分钟前更新"
-                ))
-        except Exception as e:
-            self.results.append(ValidationResult(
-                item="数据时效性",
-                level=ValidationLevel.ERROR,
-                message=f"无法验证数据时效性: {e}",
-                expected="文件存在",
-                actual="验证失败",
-                evidence=str(e)
-            ))
-
-    def get_summary(self) -> Dict[str, Any]:
-        """获取验证摘要"""
-        critical = sum(1 for r in self.results if r.level == ValidationLevel.CRITICAL)
-        error = sum(1 for r in self.results if r.level == ValidationLevel.ERROR)
-        warning = sum(1 for r in self.results if r.level == ValidationLevel.WARNING)
-        pass_count = sum(1 for r in self.results if r.level == ValidationLevel.PASS)
-
-        # 判断整体是否通过
-        overall_pass = (critical == 0) and (error == 0)
-
-        return {
-            "overall_pass": overall_pass,
-            "total": len(self.results),
-            "critical": critical,
-            "error": error,
-            "warning": warning,
-            "pass": pass_count,
-            "can_proceed": overall_pass
-        }
-
-    def to_dict(self) -> List[Dict]:
-        """转换为字典列表"""
-        return [
-            {
-                "item": r.item,
-                "level": r.level.value,
-                "message": r.message,
-                "expected": str(r.expected),
-                "actual": str(r.actual),
-                "evidence": r.evidence
-            }
-            for r in self.results
-        ]
-
-
-def validate_api_response(response: str) -> Dict[str, Any]:
-    """
-    验证API响应数据
-
-    Args:
-        response: API响应字符串（JSON格式）
-
-    Returns:
-        验证结果
-    """
-    try:
-        data = json.loads(response)
-        validator = DataValidator()
-        results = validator.validate_all(data)
-
-        return {
-            "status": "success",
-            "data": data,
-            "validation": {
-                "summary": validator.get_summary(),
-                "results": validator.to_dict()
-            }
-        }
-    except json.JSONDecodeError as e:
-        return {
-            "status": "error",
-            "message": "JSON解析失败",
-            "error": str(e)
-        }

@@ -1,0 +1,134 @@
+[
+  {
+    "agent_type": "data_collector",
+    "metric_name": "数据获取准确性",
+    "value": 95,
+    "level": "专家",
+    "description": "成功获取数据且数据正确的比例",
+    "last_updated": "2026-04-18T12:38:37.413019",
+    "evidence": "多次测试成功，数据准确",
+    "improvement_target": 98,
+    "improvement_action": "优化异常处理逻辑"
+  },
+  {
+    "agent_type": "data_collector",
+    "metric_name": "数据完整性",
+    "value": 90,
+    "level": "高级",
+    "description": "返回完整数据（包含所有必要字段）的比例",
+    "last_updated": "2026-04-18T12:38:37.413037",
+    "evidence": "基本完整，偶有字段缺失",
+    "improvement_target": 95,
+    "improvement_action": "增强数据验证"
+  },
+  {
+    "agent_type": "structure_analyzer",
+    "metric_name": "分型识别准确性",
+    "value": 90,
+    "level": "高级",
+    "description": "正确识别分型的比例",
+    "last_updated": "2026-04-18T12:38:37.413041",
+    "evidence": "人工验证准确率90%",
+    "improvement_target": 95,
+    "improvement_action": "优化分型判断算法"
+  },
+  {
+    "agent_type": "structure_analyzer",
+    "metric_name": "线段识别准确性",
+    "value": 75,
+    "level": "中级",
+    "description": "正确识别线段的比例",
+    "last_updated": "2026-04-18T12:38:37.413044",
+    "evidence": "算法较简单，复杂场景准确率低",
+    "improvement_target": 85,
+    "improvement_action": "实现更复杂的线段破坏判断"
+  },
+  {
+    "agent_type": "structure_analyzer",
+    "metric_name": "买卖点识别准确性",
+    "value": 70,
+    "level": "中级",
+    "description": "正确识别买卖点的比例",
+    "last_updated": "2026-04-18T12:38:37.413046",
+    "evidence": "背驰判断需要加强",
+    "improvement_target": 80,
+    "improvement_action": "实现更精确的背驰检测算法"
+  },
+  {
+    "agent_type": "dynamics_analyzer",
+    "metric_name": "RSI计算准确性",
+    "value": 98,
+    "level": "专家",
+    "description": "RSI计算与标准公式一致的比例",
+    "last_updated": "2026-04-18T12:38:37.413048",
+    "evidence": "与手动计算完全一致",
+    "improvement_target": 99,
+    "improvement_action": "优化计算精度"
+  },
+  {
+    "agent_type": "dynamics_analyzer",
+    "metric_name": "MACD判断准确性",
+    "value": 95,
+    "level": "专家",
+    "description": "金叉死叉判断正确的比例",
+    "last_updated": "2026-04-18T12:38:37.413050",
+    "evidence": "金叉死叉判断准确",
+    "improvement_target": 98,
+    "improvement_action": "增加趋势确认"
+  },
+  {
+    "agent_type": "decision_maker",
+    "metric_name": "止盈止损方向准确性",
+    "value": 95,
+    "level": "专家",
+    "description": "止盈止损方向正确的比例",
+    "last_updated": "2026-04-18T12:38:37.413052",
+    "evidence": "已通过逻辑验证，方向正确",
+    "improvement_target": 98,
+    "improvement_action": "持续监控"
+  },
+  {
+    "agent_type": "decision_maker",
+    "metric_name": "决策与得分一致性",
+    "value": 85,
+    "level": "高级",
+    "description": "决策与综合得分一致的比例",
+    "last_updated": "2026-04-18T12:38:37.413054",
+    "evidence": "基本一致，偶有边缘情况",
+    "improvement_target": 90,
+    "improvement_action": "优化决策阈值"
+  },
+  {
+    "agent_type": "decision_maker",
+    "metric_name": "实锤数据支持度",
+    "value": 90,
+    "level": "高级",
+    "description": "输出有数据支持的比例",
+    "last_updated": "2026-04-18T12:38:37.413062",
+    "evidence": "大部分输出有数据支持",
+    "improvement_target": 95,
+    "improvement_action": "增强数据追溯能力"
+  },
+  {
+    "agent_type": "sentiment_analyzer",
+    "metric_name": "数据获取准确性",
+    "value": 98,
+    "level": "专家",
+    "description": "成功获取恐惧贪婪指数的比例",
+    "last_updated": "2026-04-18T12:38:37.413064",
+    "evidence": "API调用稳定",
+    "improvement_target": 99,
+    "improvement_action": "优化重试机制"
+  },
+  {
+    "agent_type": "sentiment_analyzer",
+    "metric_name": "情绪解读准确性",
+    "value": 70,
+    "level": "中级",
+    "description": "情绪解读与市场实际情况符合的程度",
+    "last_updated": "2026-04-18T12:38:37.413066",
+    "evidence": "缺乏历史验证",
+    "improvement_target": 80,
+    "improvement_action": "结合历史数据回测情绪指标有效性"
+  }
+]

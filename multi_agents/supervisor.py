@@ -13,7 +13,7 @@ from datetime import datetime
 from dataclasses import dataclass
 from enum import Enum
 
-from multi_agents.data_validator import DataValidator, validate_api_response, ValidationLevel
+from multi_agents.data_validator import DataValidator, ValidationLevel
 from multi_agents.logic_validator import LogicValidator, LogicValidationResult
 
 

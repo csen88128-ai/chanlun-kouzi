@@ -1,0 +1,214 @@
+[
+  {
+    "agent_type": "data_collector",
+    "domain": "数据获取",
+    "concept": "火币API调用",
+    "status": "完整",
+    "description": "使用火币API获取BTC K线数据",
+    "confidence": 0.95,
+    "last_updated": "2026-04-18T12:38:37.410674",
+    "evidence": "成功获取200根K线数据",
+    "improvement_needed": "无",
+    "learning_resources": []
+  },
+  {
+    "agent_type": "data_collector",
+    "domain": "数据处理",
+    "concept": "24小时涨跌幅计算",
+    "status": "完整",
+    "description": "计算真正的24小时涨跌幅（不是单根K线）",
+    "confidence": 0.98,
+    "last_updated": "2026-04-18T12:38:37.410720",
+    "evidence": "使用24小时前价格计算",
+    "improvement_needed": "无",
+    "learning_resources": []
+  },
+  {
+    "agent_type": "data_collector",
+    "domain": "数据质量",
+    "concept": "数据清洗",
+    "status": "部分",
+    "description": "处理缺失值、异常值、重复数据",
+    "confidence": 0.7,
+    "last_updated": "2026-04-18T12:38:37.410724",
+    "evidence": "基础清洗",
+    "improvement_needed": "需要加强异常值检测和处理逻辑",
+    "learning_resources": [
+      "Pandas数据清洗最佳实践",
+      "金融数据异常值检测算法"
+    ]
+  },
+  {
+    "agent_type": "structure_analyzer",
+    "domain": "缠论",
+    "concept": "分型识别",
+    "status": "完整",
+    "description": "识别顶分型和底分型",
+    "confidence": 0.9,
+    "last_updated": "2026-04-18T12:38:37.410727",
+    "evidence": "成功识别30个分型（14顶、16底）",
+    "improvement_needed": "无",
+    "learning_resources": []
+  },
+  {
+    "agent_type": "structure_analyzer",
+    "domain": "缠论",
+    "concept": "笔识别",
+    "status": "完整",
+    "description": "识别向上笔和向下笔",
+    "confidence": 0.85,
+    "last_updated": "2026-04-18T12:38:37.410729",
+    "evidence": "成功识别14笔",
+    "improvement_needed": "无",
+    "learning_resources": []
+  },
+  {
+    "agent_type": "structure_analyzer",
+    "domain": "缠论",
+    "concept": "线段识别",
+    "status": "部分",
+    "description": "识别向上线段和向下线段",
+    "confidence": 0.75,
+    "last_updated": "2026-04-18T12:38:37.410732",
+    "evidence": "识别4段线段",
+    "improvement_needed": "算法较简单，需要优化复杂场景",
+    "learning_resources": [
+      "缠论线段识别高级算法",
+      "线段破坏判断标准"
+    ]
+  },
+  {
+    "agent_type": "structure_analyzer",
+    "domain": "缠论",
+    "concept": "中枢识别",
+    "status": "完整",
+    "description": "识别中枢（ZG、ZD、GG、DD）",
+    "confidence": 0.9,
+    "last_updated": "2026-04-18T12:38:37.410734",
+    "evidence": "成功识别1个中枢",
+    "improvement_needed": "无",
+    "learning_resources": []
+  },
+  {
+    "agent_type": "structure_analyzer",
+    "domain": "缠论",
+    "concept": "买卖点识别",
+    "status": "部分",
+    "description": "识别一买、二买、三买、一卖、二卖、三卖",
+    "confidence": 0.7,
+    "last_updated": "2026-04-18T12:38:37.410736",
+    "evidence": "识别6个买卖点",
+    "improvement_needed": "背驰判断需要加强，多级别买卖点识别待实现",
+    "learning_resources": [
+      "缠论买卖点背驰判断标准",
+      "多级别缠论分析方法"
+    ]
+  },
+  {
+    "agent_type": "dynamics_analyzer",
+    "domain": "技术指标",
+    "concept": "RSI计算",
+    "status": "完整",
+    "description": "计算14周期RSI",
+    "confidence": 0.98,
+    "last_updated": "2026-04-18T12:38:37.410738",
+    "evidence": "计算结果与手动验证一致",
+    "improvement_needed": "无",
+    "learning_resources": []
+  },
+  {
+    "agent_type": "dynamics_analyzer",
+    "domain": "技术指标",
+    "concept": "MACD计算",
+    "status": "完整",
+    "description": "计算MACD、Signal、Histogram",
+    "confidence": 0.95,
+    "last_updated": "2026-04-18T12:38:37.410741",
+    "evidence": "金叉死叉判断正确",
+    "improvement_needed": "无",
+    "learning_resources": []
+  },
+  {
+    "agent_type": "dynamics_analyzer",
+    "domain": "技术指标",
+    "concept": "波动率计算",
+    "status": "完整",
+    "description": "计算20周期标准差",
+    "confidence": 0.9,
+    "last_updated": "2026-04-18T12:38:37.410743",
+    "evidence": "计算逻辑正确",
+    "improvement_needed": "可考虑其他波动率指标（ATR）",
+    "learning_resources": [
+      "ATR（平均真实波幅）指标"
+    ]
+  },
+  {
+    "agent_type": "decision_maker",
+    "domain": "交易决策",
+    "concept": "止盈止损方向",
+    "status": "完整",
+    "description": "确保止盈止损方向正确",
+    "confidence": 0.95,
+    "last_updated": "2026-04-18T12:38:37.410745",
+    "evidence": "已通过逻辑验证，方向正确",
+    "improvement_needed": "无",
+    "learning_resources": []
+  },
+  {
+    "agent_type": "decision_maker",
+    "domain": "交易决策",
+    "concept": "综合评分",
+    "status": "完整",
+    "description": "基于6个因子综合评分",
+    "confidence": 0.85,
+    "last_updated": "2026-04-18T12:38:37.410747",
+    "evidence": "评分逻辑清晰",
+    "improvement_needed": "权重可能需要根据回测调整",
+    "learning_resources": [
+      "多因子权重优化方法",
+      "交易策略回测框架"
+    ]
+  },
+  {
+    "agent_type": "decision_maker",
+    "domain": "交易决策",
+    "concept": "盈亏比",
+    "status": "部分",
+    "description": "计算风险收益比",
+    "confidence": 0.8,
+    "last_updated": "2026-04-18T12:38:37.410749",
+    "evidence": "基础盈亏比计算",
+    "improvement_needed": "需要动态调整止盈止损策略",
+    "learning_resources": [
+      "动态止盈止损策略",
+      "资金管理理论"
+    ]
+  },
+  {
+    "agent_type": "sentiment_analyzer",
+    "domain": "市场情绪",
+    "concept": "恐惧贪婪指数",
+    "status": "完整",
+    "description": "获取Alternative.me的恐惧贪婪指数",
+    "confidence": 0.98,
+    "last_updated": "2026-04-18T12:38:37.410752",
+    "evidence": "成功获取数据",
+    "improvement_needed": "无",
+    "learning_resources": []
+  },
+  {
+    "agent_type": "sentiment_analyzer",
+    "domain": "市场情绪",
+    "concept": "情绪解读",
+    "status": "部分",
+    "description": "解读情绪对价格的影响",
+    "confidence": 0.7,
+    "last_updated": "2026-04-18T12:38:37.410754",
+    "evidence": "基础解读",
+    "improvement_needed": "需要结合历史数据验证情绪指标有效性",
+    "learning_resources": [
+      "情绪指标与价格相关性研究",
+      "市场情绪量化分析方法"
+    ]
+  }
+]

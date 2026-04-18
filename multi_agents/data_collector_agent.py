@@ -174,12 +174,29 @@ def build_agent(ctx=None):
 4. 返回详细的数据摘要
 
 # 输出要求
-必须包含：
-- 最新价格
-- 最高/最低价
-- 涨跌幅
-- 数据时间范围
-- 数据质量评估
+必须返回JSON格式的数据摘要，包含以下字段：
+- status: 数据状态（success/error）
+- latest_price: 最新价格（数字）
+- highest: 区间最高价（数字）
+- lowest: 区间最低价（数字）
+- h24_change: 24小时涨跌幅（数字）
+- time_range: 数据时间范围
+- file_path: 数据文件路径
+- timestamp: 时间戳（ISO格式）
+
+示例：
+{
+  "status": "success",
+  "latest_price": 77000.5,
+  "highest": 78316.0,
+  "lowest": 65000.0,
+  "h24_change": 2.65,
+  "time_range": "2026-03-16 00:00:00 ~ 2026-04-18 04:00:00",
+  "file_path": "/workspace/projects/data/BTCUSDT_4h_latest.csv",
+  "timestamp": "2026-04-18T04:00:00Z"
+}
+
+注意：请直接返回工具输出的JSON，不要添加额外的格式化或解释。
 """
 
     return create_agent(
