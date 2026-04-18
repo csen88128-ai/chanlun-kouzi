@@ -13,6 +13,10 @@ sys.path.insert(0, '/workspace/projects/src')
 
 from multi_agents.multi_level_data_collector import MultiLevelDataCollector
 from multi_agents.advanced_chanlun_theory import AdvancedChanLunTheory
+from multi_agents.buy_sell_point_analyzer import identify_buy_sell_points
+from multi_agents.trend_analyzer import analyze_trend
+from multi_agents.divergence_detector import detect_divergence
+from multi_agents.level_recursion_validator import validate_level_recursion
 from src.utils.chanlun_structure import ChanLunAnalyzer
 
 
@@ -164,32 +168,26 @@ class MultiLevelChanLunAnalyzer:
                 "latest": object_to_dict(zhongshu[-1]) if zhongshu else None
             }
 
-            # 5. 识别买卖点（暂时跳过，因为ChanLunAnalyzer没有此方法）
-            result["buy_sell_points"] = {
-                "total": 0,
-                "latest": None,
-                "note": "买卖点识别功能待实现"
-            }
+            # 5. 识别买卖点
+            buy_sell_result = identify_buy_sell_points(df, bi, segment, zhongshu[-1] if zhongshu else None)
+            result["buy_sell_points"] = buy_sell_result
 
-            # 6. 判断趋势（暂时跳过）
-            result["trend"] = {
-                "direction": "未知",
-                "note": "趋势判断功能待实现"
-            }
+            # 6. 判断趋势
+            trend_result = analyze_trend(df, bi, segment, zhongshu[-1] if zhongshu else None)
+            result["trend"] = trend_result
 
-            # 7. 检测背驰（暂时跳过）
-            result["divergence"] = {
-                "has_divergence": False,
-                "note": "背驰检测功能待实现"
-            }
+            # 7. 检测背驰
+            divergence_result = detect_divergence(df, lookback=30)
+            result["divergence"] = divergence_result
 
             print(f"  ✓ 分析完成")
             print(f"    - 分型: {result['fractals']['total']}个")
             print(f"    - 笔: {result['bi']['total']}根")
             print(f"    - 线段: {result['segment']['total']}段")
             print(f"    - 中枢: {result['zhongshu']['total']}个")
-            print(f"    - 买卖点: {result['buy_sell_points']['total']}个")
-            print(f"    - 趋势: {result['trend'].get('direction', '未知')}")
+            print(f"    - 买卖点: {result['buy_sell_points']['total_buy_points']}个买点，{result['buy_sell_points']['total_sell_points']}个卖点")
+            print(f"    - 趋势: {result['trend']['direction']}")
+            print(f"    - 背驰: {'有' if result['divergence']['has_divergence'] else '无'}")
 
         except Exception as e:
             print(f"  ✗ 分析失败: {e}")
@@ -296,6 +294,7 @@ class MultiLevelChanLunAnalyzer:
             "levels": self.levels,
             "level_analysis": {},
             "advanced_theory": {},
+            "level_recursion": {},
             "comprehensive_decision": {}
         }
 
@@ -307,19 +306,47 @@ class MultiLevelChanLunAnalyzer:
         # 2. 高阶理论分析
         report["advanced_theory"] = self.analyze_advanced_theory()
 
-        # 3. 综合决策（基于日线级别的大趋势）
+        # 3. 级别递归验证
+        print("\n" + "=" * 80)
+        print("级别递归验证")
+        print("=" * 80)
+        recursion_result = validate_level_recursion(report["level_analysis"])
+        report["level_recursion"] = recursion_result
+
+        print(f"\n验证结果: {recursion_result['validation_result']}")
+        print(f"整体一致性: {recursion_result['overall_consistency']:.1f}%")
+        print(f"主导趋势: {recursion_result['dominant_trend']}")
+        print(f"推荐操作级别: {recursion_result['recommended_level']}")
+        print(f"风险评估: {recursion_result['risk_assessment']}")
+        print(f"置信度: {recursion_result['confidence']}")
+        print(f"\n描述: {recursion_result['description']}")
+
+        # 4. 综合决策（基于日线级别的大趋势和级别递归验证）
         if "1d" in self.all_analysis and self.all_analysis["1d"]:
             daily_trend = self.all_analysis["1d"]["trend"]
             if daily_trend and "direction" in daily_trend:
                 report["comprehensive_decision"]["overall_trend"] = daily_trend["direction"]
 
-                # 根据大趋势给出建议
-                if daily_trend["direction"] == "上涨":
-                    report["comprehensive_decision"]["strategy"] = "在大趋势上涨中寻找小级别的买点"
-                elif daily_trend["direction"] == "下跌":
-                    report["comprehensive_decision"]["strategy"] = "在大趋势下跌中寻找小级别的卖点"
+                # 综合考虑级别递归验证结果
+                if recursion_result["is_valid"] and recursion_result["overall_consistency"] >= 80:
+                    # 各级别信号一致，可以操作
+                    if daily_trend["direction"] == "向上":
+                        report["comprehensive_decision"]["strategy"] = f"各级别信号一致，大趋势向上，建议在{recursion_result['recommended_level']}级别寻找买点"
+                    elif daily_trend["direction"] == "向下":
+                        report["comprehensive_decision"]["strategy"] = f"各级别信号一致，大趋势向下，建议在{recursion_result['recommended_level']}级别寻找卖点"
+                    else:
+                        report["comprehensive_decision"]["strategy"] = "各级别信号一致，大趋势盘整，建议观望或区间操作"
+                elif recursion_result["overall_consistency"] >= 50:
+                    # 部分级别信号一致，谨慎操作
+                    if daily_trend["direction"] == "向上":
+                        report["comprehensive_decision"]["strategy"] = f"部分级别信号一致，大趋势向上，建议谨慎在{recursion_result['recommended_level']}级别寻找买点"
+                    elif daily_trend["direction"] == "向下":
+                        report["comprehensive_decision"]["strategy"] = f"部分级别信号一致，大趋势向下，建议谨慎在{recursion_result['recommended_level']}级别寻找卖点"
+                    else:
+                        report["comprehensive_decision"]["strategy"] = "部分级别信号一致，大趋势盘整，建议观望为主"
                 else:
-                    report["comprehensive_decision"]["strategy"] = "大趋势不明，观望为主"
+                    # 级别信号冲突，建议观望
+                    report["comprehensive_decision"]["strategy"] = "各级别信号冲突，建议观望为主，等待信号一致"
             else:
                 report["comprehensive_decision"]["overall_trend"] = "未知"
                 report["comprehensive_decision"]["strategy"] = "日线级别分析失败，无法判断大趋势"
