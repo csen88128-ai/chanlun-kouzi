@@ -304,7 +304,7 @@ class DynamicsAnalyzer:
             volume_price_relationship = "价升量缩"  # 可能反转
             signal_score = 40
         elif price_change < 0 and volume_ratio < 0.8:
-            volume_price_relationship = "价跌量缩"  // 可能企稳
+            volume_price_relationship = "价跌量缩"  # 可能企稳
             signal_score = 60
         else:
             volume_price_relationship = "正常"

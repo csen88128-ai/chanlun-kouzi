@@ -172,10 +172,10 @@ class EnhancedDecisionMaker:
         chanlun_factor = self._calculate_chanlun_factor(chanlun_analysis)
 
         # 动力学因子（25%）
-        dynamics_factor = dynamics_analysis.get('dynamics_factor', 0.5)
+        dynamics_factor = dynamics_analysis.get('dynamics_factor', 0.5) if dynamics_analysis else 0.5
 
         # 情绪因子（20%）
-        sentiment_factor = sentiment_analysis.get('sentiment_factor', 0.5)
+        sentiment_factor = sentiment_analysis.get('sentiment_factor', 0.5) if sentiment_analysis else 0.5
 
         # 背驰信号因子（15%）
         divergence_factor = self._calculate_divergence_factor(chanlun_analysis)
