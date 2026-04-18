@@ -1,0 +1,1568 @@
+{
+  "symbol": "btcusdt",
+  "start_time": "2026-04-18 18:30:02",
+  "total_execution_time": 4.02778434753418,
+  "phases_completed": [
+    "data_collection",
+    "structure_analysis",
+    "dynamics_analysis",
+    "sentiment_analysis",
+    "decision_making"
+  ],
+  "execution_times": {
+    "data_collection": 1.9193475246429443,
+    "structure_analysis": 0.4098947048187256,
+    "dynamics_analysis": 0.00514531135559082,
+    "sentiment_analysis": 1.653778314590454,
+    "decision_making": 0.0011115074157714844
+  },
+  "errors": [],
+  "data_collection_status": "completed",
+  "structure_analysis": {
+    "symbol": "btcusdt",
+    "levels": [
+      "5m",
+      "30m",
+      "4h",
+      "1d"
+    ],
+    "level_analysis": {
+      "5m": {
+        "level": "5m",
+        "level_name": "5分钟级别",
+        "kline_count": 500,
+        "fractals": {
+          "total": 107,
+          "top_count": 50,
+          "bottom_count": 57,
+          "latest": {
+            "index": 495,
+            "type": "bottom",
+            "high": 76324.57,
+            "low": 76217.25,
+            "kline_count": 3
+          }
+        },
+        "bi": {
+          "total": 51,
+          "up_count": 26,
+          "down_count": 25,
+          "latest": {
+            "start_index": 490,
+            "end_index": 495,
+            "direction": "down",
+            "start_price": 76681.65,
+            "end_price": 76217.25,
+            "high": 76681.65,
+            "low": 76217.25
+          }
+        },
+        "segment": {
+          "total": 13,
+          "up_count": 7,
+          "down_count": 6,
+          "latest": {
+            "bi_list": [
+              {
+                "start_index": 454,
+                "end_index": 467,
+                "direction": "down",
+                "start_price": 77152.64,
+                "end_price": 76883.88,
+                "high": 77152.64,
+                "low": 76883.88
+              },
+              {
+                "start_index": 467,
+                "end_index": 469,
+                "direction": "up",
+                "start_price": 76883.88,
+                "end_price": 77035.26,
+                "high": 77035.26,
+                "low": 76883.88
+              },
+              {
+                "start_index": 490,
+                "end_index": 495,
+                "direction": "down",
+                "start_price": 76681.65,
+                "end_price": 76217.25,
+                "high": 76681.65,
+                "low": 76217.25
+              }
+            ],
+            "direction": "down",
+            "start_price": 77152.64,
+            "end_price": 76217.25,
+            "high": 77152.64,
+            "low": 76217.25
+          }
+        },
+        "zhongshu": {
+          "total": 4,
+          "latest": {
+            "segment_list": [
+              {
+                "bi_list": [
+                  {
+                    "start_index": 375,
+                    "end_index": 384,
+                    "direction": "up",
+                    "start_price": 77078.55,
+                    "end_price": 77205.55,
+                    "high": 77245.38,
+                    "low": 76976.37
+                  },
+                  {
+                    "start_index": 385,
+                    "end_index": 388,
+                    "direction": "up",
+                    "start_price": 77107.69,
+                    "end_price": 77326.98,
+                    "high": 77326.98,
+                    "low": 77107.69
+                  },
+                  {
+                    "start_index": 411,
+                    "end_index": 420,
+                    "direction": "down",
+                    "start_price": 77288.2,
+                    "end_price": 76957.15,
+                    "high": 77288.2,
+                    "low": 76957.15
+                  }
+                ],
+                "direction": "up",
+                "start_price": 77078.55,
+                "end_price": 76957.15,
+                "high": 77326.98,
+                "low": 76957.15
+              },
+              {
+                "bi_list": [
+                  {
+                    "start_index": 420,
+                    "end_index": 423,
+                    "direction": "up",
+                    "start_price": 76957.15,
+                    "end_price": 77086.13,
+                    "high": 77086.13,
+                    "low": 76957.15
+                  },
+                  {
+                    "start_index": 423,
+                    "end_index": 427,
+                    "direction": "down",
+                    "start_price": 77086.13,
+                    "end_price": 76883.49,
+                    "high": 77086.13,
+                    "low": 76883.49
+                  },
+                  {
+                    "start_index": 427,
+                    "end_index": 435,
+                    "direction": "up",
+                    "start_price": 76883.49,
+                    "end_price": 77262.37,
+                    "high": 77262.37,
+                    "low": 76883.49
+                  }
+                ],
+                "direction": "up",
+                "start_price": 76957.15,
+                "end_price": 77262.37,
+                "high": 77262.37,
+                "low": 76883.49
+              },
+              {
+                "bi_list": [
+                  {
+                    "start_index": 454,
+                    "end_index": 467,
+                    "direction": "down",
+                    "start_price": 77152.64,
+                    "end_price": 76883.88,
+                    "high": 77152.64,
+                    "low": 76883.88
+                  },
+                  {
+                    "start_index": 467,
+                    "end_index": 469,
+                    "direction": "up",
+                    "start_price": 76883.88,
+                    "end_price": 77035.26,
+                    "high": 77035.26,
+                    "low": 76883.88
+                  },
+                  {
+                    "start_index": 490,
+                    "end_index": 495,
+                    "direction": "down",
+                    "start_price": 76681.65,
+                    "end_price": 76217.25,
+                    "high": 76681.65,
+                    "low": 76217.25
+                  }
+                ],
+                "direction": "down",
+                "start_price": 77152.64,
+                "end_price": 76217.25,
+                "high": 77152.64,
+                "low": 76217.25
+              }
+            ],
+            "high": 77152.64,
+            "low": 76957.15,
+            "high_point": 77326.98,
+            "low_point": 76217.25,
+            "level": 1,
+            "start_index": 375,
+            "end_index": 495
+          }
+        },
+        "buy_sell_points": {
+          "buy_points": [],
+          "sell_points": [],
+          "latest_buy_point": null,
+          "latest_sell_point": null,
+          "trend": "盘整",
+          "next_buy_level": 0,
+          "next_sell_level": 0,
+          "total_buy_points": 0,
+          "total_sell_points": 0
+        },
+        "trend": {
+          "direction": "未知",
+          "strength": 0.0,
+          "confidence": "低",
+          "description": "趋势不明，等待方向确认",
+          "start_price": 77186.72,
+          "end_price": 76326.85,
+          "start_index": 440,
+          "end_index": 499,
+          "duration": 59,
+          "zhongshu_level": 1,
+          "support_level": 76957.15,
+          "resistance_level": 77152.64,
+          "trend_strength": 20.59447579291086,
+          "expected_direction": "方向不明，等待突破",
+          "risk_level": "中",
+          "trend_changes_count": 9
+        },
+        "divergence": {
+          "has_divergence": true,
+          "divergence_type": "顶背驰",
+          "divergence_level": "强背驰",
+          "divergence_points": [
+            {
+              "type": "顶背驰",
+              "level": "中等背驰",
+              "index": 472,
+              "price": 76848.29,
+              "macd_value": -58.32337179245951,
+              "rsi_value": 28.979267526516054,
+              "volume": 50.656656981009384,
+              "strength": 100,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 100.0）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "中等背驰",
+              "index": 474,
+              "price": 76691.74,
+              "macd_value": -89.31613456607738,
+              "rsi_value": 24.140127388535518,
+              "volume": 17.305469984994456,
+              "strength": 100,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 100.0）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "中等背驰",
+              "index": 476,
+              "price": 76606.23,
+              "macd_value": -116.70039427989104,
+              "rsi_value": 17.685177590024068,
+              "volume": 22.80822226303704,
+              "strength": 100,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 100.0）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "中等背驰",
+              "index": 480,
+              "price": 76734.07,
+              "macd_value": -111.50665584404487,
+              "rsi_value": 36.24418935584857,
+              "volume": 3.2769440691815865,
+              "strength": 100,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 100.0）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "中等背驰",
+              "index": 483,
+              "price": 76520.02,
+              "macd_value": -127.81613312210538,
+              "rsi_value": 26.551023894023103,
+              "volume": 3.735699858805103,
+              "strength": 100,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 100.0）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "中等背驰",
+              "index": 487,
+              "price": 76670.49,
+              "macd_value": -114.9919588152552,
+              "rsi_value": 49.15903246991772,
+              "volume": 9.888053300918376,
+              "strength": 100,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 100.0）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "中等背驰",
+              "index": 490,
+              "price": 76675.38,
+              "macd_value": -86.3860639804625,
+              "rsi_value": 53.712353035915996,
+              "volume": 15.268730435660716,
+              "strength": 100,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 100.0）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "中等背驰",
+              "index": 496,
+              "price": 76363.9,
+              "macd_value": -122.37308217621467,
+              "rsi_value": 44.65658221511062,
+              "volume": 12.544190877967035,
+              "strength": 100,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 100.0）"
+            }
+          ],
+          "latest_divergence": {
+            "type": "顶背驰",
+            "level": "中等背驰",
+            "index": 496,
+            "price": 76363.9,
+            "macd_value": -122.37308217621467,
+            "strength": 100,
+            "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 100.0）"
+          },
+          "macd_divergence": true,
+          "rsi_divergence": true,
+          "volume_divergence": false,
+          "divergence_strength": 80.0,
+          "description": "强背驰顶背驰信号（强度: 80.0），预示上涨动力衰竭，可能形成顶部"
+        }
+      },
+      "30m": {
+        "level": "30m",
+        "level_name": "30分钟级别",
+        "kline_count": 400,
+        "fractals": {
+          "total": 81,
+          "top_count": 39,
+          "bottom_count": 42,
+          "latest": {
+            "index": 374,
+            "type": "top",
+            "high": 77505.14,
+            "low": 77302.75,
+            "kline_count": 3
+          }
+        },
+        "bi": {
+          "total": 41,
+          "up_count": 21,
+          "down_count": 20,
+          "latest": {
+            "start_index": 371,
+            "end_index": 374,
+            "direction": "up",
+            "start_price": 77152.38,
+            "end_price": 77505.14,
+            "high": 77505.14,
+            "low": 77152.38
+          }
+        },
+        "segment": {
+          "total": 11,
+          "up_count": 5,
+          "down_count": 6,
+          "latest": {
+            "bi_list": [
+              {
+                "start_index": 322,
+                "end_index": 327,
+                "direction": "down",
+                "start_price": 75500.0,
+                "end_price": 74816.61,
+                "high": 75500.0,
+                "low": 74777.73
+              },
+              {
+                "start_index": 327,
+                "end_index": 329,
+                "direction": "up",
+                "start_price": 74816.61,
+                "end_price": 75156.99,
+                "high": 75156.99,
+                "low": 74816.61
+              },
+              {
+                "start_index": 329,
+                "end_index": 335,
+                "direction": "down",
+                "start_price": 75156.99,
+                "end_price": 74526.31,
+                "high": 75156.99,
+                "low": 74526.31
+              }
+            ],
+            "direction": "down",
+            "start_price": 75500.0,
+            "end_price": 74526.31,
+            "high": 75500.0,
+            "low": 74526.31
+          }
+        },
+        "zhongshu": {
+          "total": 3,
+          "latest": {
+            "segment_list": [
+              {
+                "bi_list": [
+                  {
+                    "start_index": 249,
+                    "end_index": 251,
+                    "direction": "up",
+                    "start_price": 73514.62,
+                    "end_price": 74175.64,
+                    "high": 74175.64,
+                    "low": 73514.62
+                  },
+                  {
+                    "start_index": 251,
+                    "end_index": 261,
+                    "direction": "down",
+                    "start_price": 74175.64,
+                    "end_price": 73815.9,
+                    "high": 74459.62,
+                    "low": 73781.85
+                  },
+                  {
+                    "start_index": 265,
+                    "end_index": 273,
+                    "direction": "up",
+                    "start_price": 73580.0,
+                    "end_price": 75263.53,
+                    "high": 75263.53,
+                    "low": 73580.0
+                  }
+                ],
+                "direction": "up",
+                "start_price": 73514.62,
+                "end_price": 75263.53,
+                "high": 75263.53,
+                "low": 73514.62
+              },
+              {
+                "bi_list": [
+                  {
+                    "start_index": 273,
+                    "end_index": 277,
+                    "direction": "down",
+                    "start_price": 75263.53,
+                    "end_price": 74537.28,
+                    "high": 75263.53,
+                    "low": 74504.0
+                  },
+                  {
+                    "start_index": 277,
+                    "end_index": 279,
+                    "direction": "up",
+                    "start_price": 74537.28,
+                    "end_price": 75426.45,
+                    "high": 75426.45,
+                    "low": 74537.28
+                  },
+                  {
+                    "start_index": 279,
+                    "end_index": 282,
+                    "direction": "down",
+                    "start_price": 75426.45,
+                    "end_price": 74447.58,
+                    "high": 75426.45,
+                    "low": 74447.58
+                  }
+                ],
+                "direction": "down",
+                "start_price": 75263.53,
+                "end_price": 74447.58,
+                "high": 75426.45,
+                "low": 74447.58
+              },
+              {
+                "bi_list": [
+                  {
+                    "start_index": 293,
+                    "end_index": 295,
+                    "direction": "down",
+                    "start_price": 75122.0,
+                    "end_price": 74839.33,
+                    "high": 75122.0,
+                    "low": 74839.33
+                  },
+                  {
+                    "start_index": 314,
+                    "end_index": 316,
+                    "direction": "down",
+                    "start_price": 74924.01,
+                    "end_price": 73912.22,
+                    "high": 74924.01,
+                    "low": 73912.22
+                  },
+                  {
+                    "start_index": 316,
+                    "end_index": 322,
+                    "direction": "up",
+                    "start_price": 73912.22,
+                    "end_price": 75500.0,
+                    "high": 75500.0,
+                    "low": 73912.22
+                  }
+                ],
+                "direction": "down",
+                "start_price": 75122.0,
+                "end_price": 75500.0,
+                "high": 75500.0,
+                "low": 73912.22
+              }
+            ],
+            "high": 75263.53,
+            "low": 74447.58,
+            "high_point": 75500.0,
+            "low_point": 73514.62,
+            "level": 1,
+            "start_index": 249,
+            "end_index": 322
+          }
+        },
+        "buy_sell_points": {
+          "buy_points": [],
+          "sell_points": [],
+          "latest_buy_point": null,
+          "latest_sell_point": null,
+          "trend": "盘整",
+          "next_buy_level": 0,
+          "next_sell_level": 0,
+          "total_buy_points": 0,
+          "total_sell_points": 0
+        },
+        "trend": {
+          "direction": "未知",
+          "strength": 0.0,
+          "confidence": "低",
+          "description": "趋势不明，等待方向确认",
+          "start_price": 74660.86,
+          "end_price": 76326.85,
+          "start_index": 340,
+          "end_index": 399,
+          "duration": 59,
+          "zhongshu_level": 1,
+          "support_level": 74447.58,
+          "resistance_level": 75263.53,
+          "trend_strength": 30.75983317019117,
+          "expected_direction": "方向不明，等待突破",
+          "risk_level": "中",
+          "trend_changes_count": 4
+        },
+        "divergence": {
+          "has_divergence": true,
+          "divergence_type": "顶背驰",
+          "divergence_level": "强背驰",
+          "divergence_points": [
+            {
+              "type": "顶背驰",
+              "level": "弱背驰",
+              "index": 373,
+              "price": 77448.57,
+              "macd_value": 430.09314690077736,
+              "rsi_value": 41.45232506606707,
+              "volume": 131.44796820939555,
+              "strength": 43.73928395194323,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 43.7）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "中等背驰",
+              "index": 378,
+              "price": 77216.52,
+              "macd_value": 257.82697267371987,
+              "rsi_value": 49.55427885775403,
+              "volume": 29.08644748332406,
+              "strength": 100,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 100.0）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "中等背驰",
+              "index": 380,
+              "price": 77291.64,
+              "macd_value": 219.12934650819807,
+              "rsi_value": 54.068586449993866,
+              "volume": 50.46784059892097,
+              "strength": 100,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 100.0）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "中等背驰",
+              "index": 382,
+              "price": 77313.96,
+              "macd_value": 191.81830587917648,
+              "rsi_value": 51.746256260125165,
+              "volume": 46.0084152377837,
+              "strength": 100,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 100.0）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "中等背驰",
+              "index": 388,
+              "price": 77157.21,
+              "macd_value": 83.5378963543917,
+              "rsi_value": 40.9336020093945,
+              "volume": 38.94522788234074,
+              "strength": 100,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 100.0）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "中等背驰",
+              "index": 391,
+              "price": 77127.52,
+              "macd_value": 57.751538395838,
+              "rsi_value": 52.6555910204156,
+              "volume": 26.627650859039544,
+              "strength": 100,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 100.0）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "中等背驰",
+              "index": 395,
+              "price": 76734.07,
+              "macd_value": -27.386426170472987,
+              "rsi_value": 29.813421734881388,
+              "volume": 45.29914789496377,
+              "strength": 100,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 100.0）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "中等背驰",
+              "index": 397,
+              "price": 76607.11,
+              "macd_value": -80.79460381086392,
+              "rsi_value": 22.505719806294863,
+              "volume": 87.90304109634879,
+              "strength": 100,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 100.0）"
+            }
+          ],
+          "latest_divergence": {
+            "type": "顶背驰",
+            "level": "中等背驰",
+            "index": 397,
+            "price": 76607.11,
+            "macd_value": -80.79460381086392,
+            "strength": 100,
+            "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 100.0）"
+          },
+          "macd_divergence": true,
+          "rsi_divergence": true,
+          "volume_divergence": false,
+          "divergence_strength": 80.0,
+          "description": "强背驰顶背驰信号（强度: 80.0），预示上涨动力衰竭，可能形成顶部"
+        }
+      },
+      "4h": {
+        "level": "4h",
+        "level_name": "4小时级别",
+        "kline_count": 300,
+        "fractals": {
+          "total": 47,
+          "top_count": 24,
+          "bottom_count": 23,
+          "latest": {
+            "index": 295,
+            "type": "top",
+            "high": 78316.0,
+            "low": 77000.02,
+            "kline_count": 3
+          }
+        },
+        "bi": {
+          "total": 20,
+          "up_count": 8,
+          "down_count": 12,
+          "latest": {
+            "start_index": 254,
+            "end_index": 269,
+            "direction": "down",
+            "start_price": 73443.1,
+            "end_price": 70553.52,
+            "high": 73793.1,
+            "low": 70515.36
+          }
+        },
+        "segment": {
+          "total": 6,
+          "up_count": 2,
+          "down_count": 4,
+          "latest": {
+            "bi_list": [
+              {
+                "start_index": 155,
+                "end_index": 163,
+                "direction": "down",
+                "start_price": 72008.99,
+                "end_price": 68173.01,
+                "high": 72008.99,
+                "low": 68173.01
+              },
+              {
+                "start_index": 207,
+                "end_index": 229,
+                "direction": "up",
+                "start_price": 66275.23,
+                "end_price": 70338.83,
+                "high": 70338.83,
+                "low": 66275.23
+              },
+              {
+                "start_index": 229,
+                "end_index": 234,
+                "direction": "down",
+                "start_price": 70338.83,
+                "end_price": 67726.99,
+                "high": 70338.83,
+                "low": 67726.99
+              }
+            ],
+            "direction": "down",
+            "start_price": 72008.99,
+            "end_price": 67726.99,
+            "high": 72008.99,
+            "low": 66275.23
+          }
+        },
+        "zhongshu": {
+          "total": 2,
+          "latest": {
+            "segment_list": [
+              {
+                "bi_list": [
+                  {
+                    "start_index": 120,
+                    "end_index": 125,
+                    "direction": "up",
+                    "start_price": 68794.32,
+                    "end_price": 71351.73,
+                    "high": 71351.73,
+                    "low": 68794.32
+                  },
+                  {
+                    "start_index": 125,
+                    "end_index": 127,
+                    "direction": "down",
+                    "start_price": 71351.73,
+                    "end_price": 69387.38,
+                    "high": 71351.73,
+                    "low": 69387.38
+                  },
+                  {
+                    "start_index": 127,
+                    "end_index": 130,
+                    "direction": "up",
+                    "start_price": 69387.38,
+                    "end_price": 70880.44,
+                    "high": 70929.22,
+                    "low": 69387.38
+                  }
+                ],
+                "direction": "up",
+                "start_price": 68794.32,
+                "end_price": 70880.44,
+                "high": 71351.73,
+                "low": 68794.32
+              },
+              {
+                "bi_list": [
+                  {
+                    "start_index": 130,
+                    "end_index": 137,
+                    "direction": "down",
+                    "start_price": 70880.44,
+                    "end_price": 68119.79,
+                    "high": 71090.5,
+                    "low": 68119.79
+                  },
+                  {
+                    "start_index": 138,
+                    "end_index": 140,
+                    "direction": "down",
+                    "start_price": 69012.65,
+                    "end_price": 67400.0,
+                    "high": 69012.65,
+                    "low": 67400.0
+                  },
+                  {
+                    "start_index": 151,
+                    "end_index": 155,
+                    "direction": "up",
+                    "start_price": 68917.54,
+                    "end_price": 72008.99,
+                    "high": 72008.99,
+                    "low": 68917.54
+                  }
+                ],
+                "direction": "down",
+                "start_price": 70880.44,
+                "end_price": 72008.99,
+                "high": 72008.99,
+                "low": 67400.0
+              },
+              {
+                "bi_list": [
+                  {
+                    "start_index": 155,
+                    "end_index": 163,
+                    "direction": "down",
+                    "start_price": 72008.99,
+                    "end_price": 68173.01,
+                    "high": 72008.99,
+                    "low": 68173.01
+                  },
+                  {
+                    "start_index": 207,
+                    "end_index": 229,
+                    "direction": "up",
+                    "start_price": 66275.23,
+                    "end_price": 70338.83,
+                    "high": 70338.83,
+                    "low": 66275.23
+                  },
+                  {
+                    "start_index": 229,
+                    "end_index": 234,
+                    "direction": "down",
+                    "start_price": 70338.83,
+                    "end_price": 67726.99,
+                    "high": 70338.83,
+                    "low": 67726.99
+                  }
+                ],
+                "direction": "down",
+                "start_price": 72008.99,
+                "end_price": 67726.99,
+                "high": 72008.99,
+                "low": 66275.23
+              }
+            ],
+            "high": 71351.73,
+            "low": 68794.32,
+            "high_point": 72008.99,
+            "low_point": 66275.23,
+            "level": 1,
+            "start_index": 120,
+            "end_index": 234
+          }
+        },
+        "buy_sell_points": {
+          "buy_points": [],
+          "sell_points": [],
+          "latest_buy_point": null,
+          "latest_sell_point": null,
+          "trend": "盘整",
+          "next_buy_level": 0,
+          "next_sell_level": 0,
+          "total_buy_points": 0,
+          "total_sell_points": 0
+        },
+        "trend": {
+          "direction": "未知",
+          "strength": 0.0,
+          "confidence": "低",
+          "description": "趋势不明，等待方向确认",
+          "start_price": 71313.43,
+          "end_price": 76326.85,
+          "start_index": 240,
+          "end_index": 299,
+          "duration": 59,
+          "zhongshu_level": 1,
+          "support_level": 68794.32,
+          "resistance_level": 71351.73,
+          "trend_strength": 34.65577648995087,
+          "expected_direction": "方向不明，等待突破",
+          "risk_level": "中",
+          "trend_changes_count": 2
+        },
+        "divergence": {
+          "has_divergence": true,
+          "divergence_type": "顶背驰",
+          "divergence_level": "弱背驰",
+          "divergence_points": [
+            {
+              "type": "顶背驰",
+              "level": "弱背驰",
+              "index": 274,
+              "price": 74515.0,
+              "macd_value": 619.4406009895756,
+              "rsi_value": 60.6690525250335,
+              "volume": 643.1483412472627,
+              "strength": -74.39727278434651,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: -74.4）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "弱背驰",
+              "index": 276,
+              "price": 75303.78,
+              "macd_value": 825.0077389489015,
+              "rsi_value": 77.95306994850574,
+              "volume": 1073.1405488977766,
+              "strength": -44.88689711450168,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: -44.9）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "弱背驰",
+              "index": 279,
+              "price": 74337.33,
+              "macd_value": 813.9353056493128,
+              "rsi_value": 73.75904807678306,
+              "volume": 372.107609310524,
+              "strength": 6.287291255625242,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 6.3）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "弱背驰",
+              "index": 281,
+              "price": 74180.59,
+              "macd_value": 733.2993147398811,
+              "rsi_value": 71.75008004141719,
+              "volume": 404.11149184369384,
+              "strength": 33.07805966935275,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 33.1）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "弱背驰",
+              "index": 283,
+              "price": 74989.7,
+              "macd_value": 725.7244116814254,
+              "rsi_value": 73.78214182154909,
+              "volume": 506.3512210254461,
+              "strength": 40.00358219051072,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 40.0）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "弱背驰",
+              "index": 294,
+              "price": 77754.84,
+              "macd_value": 835.2593611971679,
+              "rsi_value": 77.8341257847895,
+              "volume": 1024.4111021999004,
+              "strength": 10.909419040707306,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 10.9）"
+            }
+          ],
+          "latest_divergence": {
+            "type": "顶背驰",
+            "level": "弱背驰",
+            "index": 294,
+            "price": 77754.84,
+            "macd_value": 835.2593611971679,
+            "strength": 10.909419040707306,
+            "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 10.9）"
+          },
+          "macd_divergence": true,
+          "rsi_divergence": true,
+          "volume_divergence": false,
+          "divergence_strength": 80.0,
+          "description": "弱背驰顶背驰信号（强度: 80.0），预示上涨动力衰竭，可能形成顶部"
+        }
+      },
+      "1d": {
+        "level": "1d",
+        "level_name": "日线级别",
+        "kline_count": 200,
+        "fractals": {
+          "total": 34,
+          "top_count": 18,
+          "bottom_count": 16,
+          "latest": {
+            "index": 197,
+            "type": "bottom",
+            "high": 75426.45,
+            "low": 73314.98,
+            "kline_count": 3
+          }
+        },
+        "bi": {
+          "total": 19,
+          "up_count": 9,
+          "down_count": 10,
+          "latest": {
+            "start_index": 182,
+            "end_index": 194,
+            "direction": "down",
+            "start_price": 69299.79,
+            "end_price": 70515.36,
+            "high": 73793.1,
+            "low": 65714.29
+          }
+        },
+        "segment": {
+          "total": 5,
+          "up_count": 3,
+          "down_count": 2,
+          "latest": {
+            "bi_list": [
+              {
+                "start_index": 146,
+                "end_index": 148,
+                "direction": "up",
+                "start_price": 62518.0,
+                "end_price": 69987.99,
+                "high": 69987.99,
+                "low": 62518.0
+              },
+              {
+                "start_index": 148,
+                "end_index": 150,
+                "direction": "down",
+                "start_price": 69987.99,
+                "end_price": 63034.2,
+                "high": 69987.99,
+                "low": 63034.2
+              },
+              {
+                "start_index": 150,
+                "end_index": 155,
+                "direction": "up",
+                "start_price": 63034.2,
+                "end_price": 74051.67,
+                "high": 74051.67,
+                "low": 63034.2
+              }
+            ],
+            "direction": "up",
+            "start_price": 62518.0,
+            "end_price": 74051.67,
+            "high": 74051.67,
+            "low": 62518.0
+          }
+        },
+        "zhongshu": {
+          "total": 1,
+          "latest": {
+            "segment_list": [
+              {
+                "bi_list": [
+                  {
+                    "start_index": 37,
+                    "end_index": 58,
+                    "direction": "up",
+                    "start_price": 99268.68,
+                    "end_price": 93103.09,
+                    "high": 107500.0,
+                    "low": 80628.06
+                  },
+                  {
+                    "start_index": 64,
+                    "end_index": 67,
+                    "direction": "down",
+                    "start_price": 94158.63,
+                    "end_price": 87745.0,
+                    "high": 94158.63,
+                    "low": 87745.0
+                  },
+                  {
+                    "start_index": 67,
+                    "end_index": 70,
+                    "direction": "up",
+                    "start_price": 87745.0,
+                    "end_price": 94580.81,
+                    "high": 94580.81,
+                    "low": 87745.0
+                  }
+                ],
+                "direction": "up",
+                "start_price": 99268.68,
+                "end_price": 94580.81,
+                "high": 107500.0,
+                "low": 80628.06
+              },
+              {
+                "bi_list": [
+                  {
+                    "start_index": 92,
+                    "end_index": 97,
+                    "direction": "up",
+                    "start_price": 87265.19,
+                    "end_price": 94788.46,
+                    "high": 94788.46,
+                    "low": 87265.19
+                  },
+                  {
+                    "start_index": 97,
+                    "end_index": 99,
+                    "direction": "down",
+                    "start_price": 94788.46,
+                    "end_price": 89308.32,
+                    "high": 94788.46,
+                    "low": 89308.32
+                  },
+                  {
+                    "start_index": 99,
+                    "end_index": 106,
+                    "direction": "up",
+                    "start_price": 89308.32,
+                    "end_price": 97916.34,
+                    "high": 97916.34,
+                    "low": 89308.32
+                  }
+                ],
+                "direction": "up",
+                "start_price": 87265.19,
+                "end_price": 97916.34,
+                "high": 97916.34,
+                "low": 87265.19
+              },
+              {
+                "bi_list": [
+                  {
+                    "start_index": 115,
+                    "end_index": 117,
+                    "direction": "down",
+                    "start_price": 91225.33,
+                    "end_price": 86075.54,
+                    "high": 91225.33,
+                    "low": 86075.54
+                  },
+                  {
+                    "start_index": 128,
+                    "end_index": 137,
+                    "direction": "up",
+                    "start_price": 60010.0,
+                    "end_price": 70971.66,
+                    "high": 72257.82,
+                    "low": 60010.0
+                  },
+                  {
+                    "start_index": 137,
+                    "end_index": 141,
+                    "direction": "down",
+                    "start_price": 70971.66,
+                    "end_price": 65636.07,
+                    "high": 70971.66,
+                    "low": 65636.07
+                  }
+                ],
+                "direction": "down",
+                "start_price": 91225.33,
+                "end_price": 65636.07,
+                "high": 91225.33,
+                "low": 60010.0
+              }
+            ],
+            "high": 91225.33,
+            "low": 87265.19,
+            "high_point": 107500.0,
+            "low_point": 60010.0,
+            "level": 1,
+            "start_index": 37,
+            "end_index": 141
+          }
+        },
+        "buy_sell_points": {
+          "buy_points": [],
+          "sell_points": [],
+          "latest_buy_point": null,
+          "latest_sell_point": null,
+          "trend": "盘整",
+          "next_buy_level": 0,
+          "next_sell_level": 0,
+          "total_buy_points": 0,
+          "total_sell_points": 0
+        },
+        "trend": {
+          "direction": "未知",
+          "strength": 0.0,
+          "confidence": "低",
+          "description": "趋势不明，等待方向确认",
+          "start_price": 67707.88,
+          "end_price": 76293.59,
+          "start_index": 140,
+          "end_index": 199,
+          "duration": 59,
+          "zhongshu_level": 1,
+          "support_level": 87265.19,
+          "resistance_level": 91225.33,
+          "trend_strength": 42.11046615583278,
+          "expected_direction": "方向不明，等待突破",
+          "risk_level": "中",
+          "trend_changes_count": 3
+        },
+        "divergence": {
+          "has_divergence": true,
+          "divergence_type": "顶背驰",
+          "divergence_level": "弱背驰",
+          "divergence_points": [
+            {
+              "type": "顶背驰",
+              "level": "弱背驰",
+              "index": 171,
+              "price": 70621.3,
+              "macd_value": 195.00080300059926,
+              "rsi_value": 57.72334962760509,
+              "volume": 1697.4373509955187,
+              "strength": 35.58097355517148,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 35.6）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "中等背驰",
+              "index": 173,
+              "price": 70121.18,
+              "macd_value": 6.457732668306562,
+              "rsi_value": 53.40275561907165,
+              "volume": 3789.4852462209737,
+              "strength": 100,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 100.0）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "中等背驰",
+              "index": 178,
+              "price": 67023.85,
+              "macd_value": -581.564483903494,
+              "rsi_value": 40.5098978899808,
+              "volume": 1969.4964415007455,
+              "strength": 100,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 100.0）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "中等背驰",
+              "index": 180,
+              "price": 67638.78,
+              "macd_value": -783.4475186915952,
+              "rsi_value": 34.111607993832735,
+              "volume": 2443.2864155453763,
+              "strength": 100,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 100.0）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "中等背驰",
+              "index": 185,
+              "price": 67379.97,
+              "macd_value": -852.590823114806,
+              "rsi_value": 40.55187080729119,
+              "volume": 955.8353836112342,
+              "strength": 100,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 100.0）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "中等背驰",
+              "index": 187,
+              "price": 69939.1,
+              "macd_value": -600.7139768465131,
+              "rsi_value": 49.45967632807811,
+              "volume": 4127.774677160216,
+              "strength": 100,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: 100.0）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "弱背驰",
+              "index": 192,
+              "price": 72867.32,
+              "macd_value": 533.5897182473273,
+              "rsi_value": 67.66300618744916,
+              "volume": 1810.346188192273,
+              "strength": -233.6225384499877,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: -233.6）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "弱背驰",
+              "index": 195,
+              "price": 75303.78,
+              "macd_value": 975.5509802837623,
+              "rsi_value": 71.06355248326798,
+              "volume": 5054.699893633882,
+              "strength": -149.2106227922163,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: -149.2）"
+            },
+            {
+              "type": "顶背驰",
+              "level": "弱背驰",
+              "index": 198,
+              "price": 77754.84,
+              "macd_value": 1626.1974473454902,
+              "rsi_value": 75.35926153514094,
+              "volume": 4031.345098514536,
+              "strength": -72.22122699260635,
+              "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: -72.2）"
+            }
+          ],
+          "latest_divergence": {
+            "type": "顶背驰",
+            "level": "弱背驰",
+            "index": 198,
+            "price": 77754.84,
+            "macd_value": 1626.1974473454902,
+            "strength": -72.22122699260635,
+            "description": "价格创出新高，但MACD没有创新高，顶背驰信号（强度: -72.2）"
+          },
+          "macd_divergence": true,
+          "rsi_divergence": true,
+          "volume_divergence": false,
+          "divergence_strength": 80.0,
+          "description": "弱背驰顶背驰信号（强度: 80.0），预示上涨动力衰竭，可能形成顶部"
+        }
+      }
+    },
+    "advanced_theory": {
+      "small_to_big": {
+        "5m_to_30m": {
+          "has_small_to_big": false,
+          "small_level_signal": null,
+          "big_level_status": null,
+          "risk_level": "低",
+          "description": "未检测到小转大信号",
+          "action": ""
+        },
+        "30m_to_4h": {
+          "has_small_to_big": false,
+          "small_level_signal": null,
+          "big_level_status": null,
+          "risk_level": "低",
+          "description": "未检测到小转大信号",
+          "action": ""
+        },
+        "4h_to_1d": {
+          "has_small_to_big": false,
+          "small_level_signal": null,
+          "big_level_status": null,
+          "risk_level": "低",
+          "description": "未检测到小转大信号",
+          "action": ""
+        }
+      },
+      "nine_segment_upgrade": {},
+      "interval_nested": {
+        "has_interval_nested": false,
+        "divergence_levels": [],
+        "divergence_count": 0,
+        "divergence_type": null,
+        "reliability": "低",
+        "description": "仅0个级别出现背驰，未形成区间套",
+        "action": ""
+      }
+    },
+    "level_recursion": {
+      "is_valid": false,
+      "validation_result": "不通过",
+      "level_pairs": [
+        {
+          "level1": "5m",
+          "level2": "30m",
+          "relationship": "一致",
+          "trend_consistency": false,
+          "signal_strength": 16.0,
+          "divergence_count": 2,
+          "buy_sell_match": false,
+          "description": "5m与30m：级别关系为一致，趋势不一致"
+        },
+        {
+          "level1": "30m",
+          "level2": "4h",
+          "relationship": "一致",
+          "trend_consistency": false,
+          "signal_strength": 16.0,
+          "divergence_count": 2,
+          "buy_sell_match": false,
+          "description": "30m与4h：级别关系为一致，趋势不一致"
+        },
+        {
+          "level1": "4h",
+          "level2": "1d",
+          "relationship": "一致",
+          "trend_consistency": false,
+          "signal_strength": 16.0,
+          "divergence_count": 2,
+          "buy_sell_match": false,
+          "description": "4h与1d：级别关系为一致，趋势不一致"
+        },
+        {
+          "level1": "5m",
+          "level2": "4h",
+          "relationship": "一致",
+          "trend_consistency": false,
+          "signal_strength": 16.0,
+          "divergence_count": 2,
+          "buy_sell_match": false,
+          "description": "5m与4h：级别关系为一致，趋势不一致"
+        }
+      ],
+      "overall_consistency": 8.0,
+      "dominant_trend": "未知",
+      "recommended_level": "30m",
+      "risk_assessment": "高",
+      "confidence": "低",
+      "description": "级别递归验证不通过，整体一致性8.0%，级别信号严重冲突，建议观望"
+    },
+    "comprehensive_decision": {
+      "overall_trend": "未知",
+      "strategy": "各级别信号冲突，建议观望为主，等待信号一致"
+    }
+  },
+  "dynamics_analysis": {
+    "rsi": {
+      "current_rsi": 22.673812471493008,
+      "signal": "超卖",
+      "strength": "强",
+      "direction": "向上",
+      "signal_score": 22.673812471493008
+    },
+    "macd": {
+      "macd": -147.88791418846813,
+      "signal": -45.097616306237825,
+      "histogram": -102.7902978822303,
+      "signal_type": "空头排列",
+      "strength": "中",
+      "direction": "向下",
+      "signal_score": 40
+    },
+    "volatility": {
+      "current_volatility": 0.1558796919523711,
+      "volatility_trend": "稳定",
+      "volatility_level": "中",
+      "signal_score": 50
+    },
+    "volume": {
+      "current_volume": 0.0,
+      "volume_ma": 51.900015510218736,
+      "volume_ratio": 0.0,
+      "volume_trend": "缩量",
+      "volume_price_relationship": "正常",
+      "signal_score": 50
+    },
+    "overall_score": 40.168453117873256,
+    "overall_signal": "震荡",
+    "overall_direction": "震荡",
+    "dynamics_factor": 0.40168453117873254,
+    "description": "动力学分析：RSI=22.7（超卖），MACD=-147.89（空头排列），波动率=0.16%（中），成交量=缩量（正常），综合评分=40.2（震荡）"
+  },
+  "sentiment_analysis": {
+    "fear_greed": {
+      "value": 26,
+      "classification": "Fear",
+      "timestamp": "1776470400",
+      "trend": "上升",
+      "sentiment_score": 26
+    },
+    "money_flow": {
+      "net_flow": 0.00048690867931432645,
+      "flow_direction": "中性",
+      "flow_trend": "上升",
+      "flow_strength": "弱",
+      "sentiment_score": 50.0
+    },
+    "overall_score": 35.6,
+    "overall_sentiment": "恐惧",
+    "sentiment_factor": 0.35600000000000004,
+    "description": "市场情绪：恐惧贪婪指数=26（Fear，上升），资金流向=中性（弱，上升），综合情绪=恐惧（35.6）"
+  },
+  "decision": {
+    "overall_score": 24.562113279468313,
+    "action": "卖出",
+    "confidence": "高",
+    "risk_level": "极高",
+    "stop_loss": 77853.387,
+    "take_profit": 74418.67875,
+    "position_size": "0% (观望)",
+    "holding_period": "3-7天",
+    "factors": {
+      "chanlun_factor": 0.08,
+      "dynamics_factor": 0.40168453117873254,
+      "sentiment_factor": 0.35600000000000004,
+      "divergence_factor": 0.2,
+      "risk_factor": 0.8
+    },
+    "reasoning": "综合评分24.6，操作类型：卖出。\n决策因子：缠论结构(0.08) + 动力学(0.40) + 情绪(0.36) + 背驰(0.20) + 风险(0.80)。\n缠论结构信号较弱。 动力学指标中性。 市场情绪中性。",
+    "recommendation": "建议操作：卖出。\n置信度：高，风险等级：极高。\n建议仓位：0% (观望)。\n风险极高，建议谨慎操作或观望。"
+  },
+  "messages": [
+    "content='数据采集完成：4个级别，耗时 1.92秒' additional_kwargs={} response_metadata={} id='d644b345-b80a-40c3-a892-9faa3fd87d2f'",
+    "content='数据采集完成：4个级别，耗时 1.92秒' additional_kwargs={} response_metadata={} id='fe558992-d25e-499d-9ee3-6ed05e92a358'",
+    "content='结构分析完成：4个级别，耗时 0.41秒' additional_kwargs={} response_metadata={} id='f2b1e8fe-bc37-4367-a88a-3464b55564f3'",
+    "content='结构分析完成：4个级别，耗时 0.41秒' additional_kwargs={} response_metadata={} id='0090228b-90d2-4780-a2c8-125aa024ada2'",
+    "content='动力学分析完成：RSI=22.7，耗时 0.01秒' additional_kwargs={} response_metadata={} id='00c930c8-c03c-4d9e-83ee-00483cd7f0aa'",
+    "content='动力学分析完成：RSI=22.7，耗时 0.01秒' additional_kwargs={} response_metadata={} id='3d3d8f90-e147-4994-acc1-957ba9250972'",
+    "content='市场情绪分析完成：FearGreed=26，耗时 1.65秒' additional_kwargs={} response_metadata={} id='ad89e340-ba07-44cc-acdb-260bf7436222'",
+    "content='市场情绪分析完成：FearGreed=26，耗时 1.65秒' additional_kwargs={} response_metadata={} id='175c432f-b64b-4e28-9664-16a12535623a'",
+    "content='决策制定完成：卖出，耗时 0.00秒' additional_kwargs={} response_metadata={} id='0a5e8da1-b070-4bdf-a953-52390d6914ff'",
+    "content='决策制定完成：卖出，耗时 0.00秒' additional_kwargs={} response_metadata={} id='ea4b0e4c-49f9-4bde-a390-d5f70e031bad'"
+  ],
+  "parallel_execution_enabled": false,
+  "monitoring_enabled": true,
+  "cache_enabled": true,
+  "execution_metrics": {
+    "data_collection": {
+      "status": "completed",
+      "execution_time": 1.9193475246429443,
+      "data_points": 4
+    },
+    "structure_analysis": {
+      "status": "completed",
+      "execution_time": 0.4098947048187256,
+      "levels_analyzed": 4
+    },
+    "dynamics_analysis": {
+      "status": "completed",
+      "execution_time": 0.00514531135559082
+    },
+    "sentiment_analysis": {
+      "status": "completed",
+      "execution_time": 1.653778314590454
+    },
+    "decision_making": {
+      "status": "completed",
+      "execution_time": 0.0011115074157714844,
+      "overall_score": 24.562113279468313
+    }
+  },
+  "alerts": [],
+  "agent_priorities": {
+    "data_collection": "CRITICAL",
+    "structure_analysis": "CRITICAL",
+    "dynamics_analysis": "MEDIUM",
+    "sentiment_analysis": "MEDIUM",
+    "decision_making": "HIGH"
+  },
+  "priority_adjustment_reason": "级别一致性低，提高结构分析优先级"
+}
