@@ -1,200 +1,144 @@
 {
   "execution_times": {
-    "data_collector": 10.772994995117188,
-    "structure_analyzer": 41.544878244400024,
-    "dynamics_analyzer": 6.884726047515869,
-    "sentiment_analyzer": 6.187070608139038,
-    "decision_maker": 52.14416027069092
+    "data_collector": 12.161255359649658,
+    "structure_analyzer": 21.894952535629272,
+    "dynamics_analyzer": 7.491592884063721,
+    "sentiment_analyzer": 5.853937387466431,
+    "decision_maker": 32.9978711605072
   },
-  "total_time": 117.53383016586304,
+  "total_time": 80.39960932731628,
   "results": {
     "data": {
       "status": "success",
-      "latest_price": 77158.24,
+      "latest_price": 77152.64,
       "highest": 78316.0,
       "lowest": 65000.0,
-      "h24_change": 2.8,
+      "h24_change": 2.79,
       "time_range": "2026-03-16 00:00:00 ~ 2026-04-18 04:00:00",
       "file_path": "/workspace/projects/data/BTCUSDT_4h_latest.csv",
       "timestamp": "2026-04-18T04:00:00Z"
     },
     "structure": {
       "status": "success",
-      "kline_count": 200,
-      "data_range": "2026-03-16 00:00:00 ~ 2026-04-18 04:00:00",
+      "level_info": {
+        "time_level": "4h",
+        "chanlun_level": 1,
+        "holding_period": "2-7天"
+      },
       "fractals": {
-        "total_count": 30,
-        "top_count": 14,
-        "bottom_count": 16,
+        "total": 30,
+        "top": 14,
+        "bottom": 16,
         "latest_top": {
-          "index": 196,
-          "price": 78316.0
+          "price": 78316.0,
+          "index": 196
         },
         "latest_bottom": {
-          "index": 179,
-          "price": 73811.54
+          "price": 73811.54,
+          "index": 179
         }
       },
-      "bis": {
-        "total_count": 14,
-        "up_count": 6,
-        "down_count": 8,
-        "latest_bi": {
+      "bi": {
+        "total": 14,
+        "up": 6,
+        "down": 8,
+        "latest": {
           "direction": "down",
-          "start_price": 73443.1,
-          "end_price": 70553.52,
-          "high": 73793.1,
-          "low": 70515.36
+          "start": 73443.1,
+          "end": 70553.52
         }
       },
-      "segments": {
-        "total_count": 4,
-        "up_count": 2,
-        "down_count": 2,
-        "latest_segment": {
+      "segment": {
+        "total": 4,
+        "up": 2,
+        "down": 2,
+        "latest": {
           "direction": "down",
-          "start_price": 72008.99,
-          "end_price": 67726.99,
-          "high": 72008.99,
-          "low": 66275.23
+          "start": 72008.99,
+          "end": 67726.99
         }
       },
       "zhongshu": {
-        "total_count": 1,
+        "total": 1,
         "latest": {
           "zg": 71351.73,
           "zd": 68794.32,
           "gg": 76000.0,
           "dd": 67400.0,
-          "level": 1,
-          "segment_count": 3
-        },
-        "all_zhongshu": [
-          {
-            "zg": 71351.73,
-            "zd": 68794.32,
-            "gg": 76000.0,
-            "dd": 67400.0,
-            "level": 1,
-            "segment_count": 3
-          }
-        ]
+          "level": 1
+        }
       },
       "buy_sell_points": {
-        "total_count": 6,
-        "latest_signal": {
+        "total": 6,
+        "latest": {
           "type": "三买",
-          "index": 138,
           "price": 71235.67,
           "level": 1,
-          "strength": 0.8,
-          "is_buy": true
-        },
-        "all_signals": [
-          {
-            "type": "一卖",
-            "index": 58,
-            "price": 71736.83,
-            "level": 1,
-            "strength": 0.9
-          },
-          {
-            "type": "二卖",
-            "index": 59,
-            "price": 71598.73,
-            "level": 1,
-            "strength": 0.7
-          },
-          {
-            "type": "一买",
-            "index": 66,
-            "price": 68540.68,
-            "level": 1,
-            "strength": 0.9
-          },
-          {
-            "type": "三卖",
-            "index": 68,
-            "price": 68625.12,
-            "level": 1,
-            "strength": 0.8
-          },
-          {
-            "type": "三买",
-            "index": 138,
-            "price": 71235.67,
-            "level": 1,
-            "strength": 0.8
-          }
-        ]
+          "strength": 0.8
+        }
       },
-      "trend_analysis": {
+      "trend": {
         "direction": "下降",
         "strength": 0.5,
         "phase": "突破上涨"
       }
     },
     "dynamics": {
-      "rsi": 69.76,
+      "rsi": 69.74,
       "rsi_status": "正常",
-      "macd": 1024.11,
-      "macd_signal": 876.23,
-      "macd_histogram": 147.88,
+      "macd": 1023.66,
+      "macd_signal": 876.14,
+      "macd_histogram": 147.52,
       "macd_signal_type": "金叉",
-      "volatility": 1235.88,
+      "volatility": 1235.44,
       "volatility_status": "高",
-      "volume": 0.29,
+      "volume": 0.34,
       "volume_status": "缩量",
       "momentum_direction": "上升"
     },
     "sentiment": {
       "fear_greed_index": 26,
-      "classification": "Fear",
-      "sentiment": "恐惧",
-      "implication": "市场悲观，可能存在机会",
-      "timestamp": "1776470400"
+      "classification": "恐惧",
+      "sentiment": "市场情绪悲观",
+      "implication": "当前市场处于恐惧状态，通常伴随超卖和较低的投资者信心，可能存在逆向投资机会，但需警惕进一步下跌风险",
+      "timestamp": "2026-05-17T00:00:00Z"
     },
     "decision": {
       "status": "success",
-      "decision": "卖出",
+      "decision": "偏空",
       "emoji": "🔴",
-      "score": 17,
-      "confidence": "高",
-      "current_price": 77158.24,
-      "factors": [
-        "趋势: -25 (下降)",
-        "缠论: +10 (三买, 强度0.80)",
-        "RSI: -8 (偏高 69.8)",
-        "MACD: -8 (死叉)",
-        "位置: -10 (高于中枢高点)",
-        "情绪: +8 (恐惧 26)"
-      ],
-      "summary": "综合得分: 17.0/100",
+      "score": 32,
+      "confidence": "中",
+      "current_price": 77152.64,
+      "factors": {
+        "趋势因子": 0,
+        "缠论买卖点": 0,
+        "RSI因子": -8,
+        "MACD因子": -8,
+        "价格位置": -10,
+        "市场情绪": 8
+      },
       "trading_plan": {
-        "entry": 77158.24,
+        "entry": 77152.64,
         "position_size": "20%",
         "take_profit": [
           {
             "level": 1,
-            "price": 67400.0,
-            "target": "中枢低点"
+            "price": 73811.54,
+            "target": "前期低点"
           },
           {
             "level": 2,
-            "price": 73811.54,
-            "target": "前期低点"
+            "price": 67400.0,
+            "target": "中枢低点"
           }
         ],
-        "stop_loss": [
-          {
-            "level": 1,
-            "price": 79472.99,
-            "target": "反弹3%"
-          }
-        ],
-        "risk_reward_ratio": [
-          4.22
-        ]
+        "stop_loss": {
+          "level": 1,
+          "price": 79467.22,
+          "target": "反弹3%"
+        },
+        "risk_reward_ratio": 4.21
       }
     }
   }

@@ -1,0 +1,301 @@
+{
+  "report_meta": {
+    "report_id": "20260418-001",
+    "generated_at": "2026-04-18T04:00:00Z",
+    "system_version": "v2.1",
+    "data_source": "火币API（HTX）",
+    "analysis_duration": 80.40,
+    "currency": "BTC/USDT",
+    "timeframe": "4h"
+  },
+  "market_overview": {
+    "current_price": 77152.64,
+    "h24_change": 2.79,
+    "h24_high": 78316.0,
+    "h24_low": 65000.0,
+    "price_range": "65000-78316",
+    "data_range": "2026-03-16 ~ 2026-04-18",
+    "kline_count": 200
+  },
+  "chanlun_analysis": {
+    "level_info": {
+      "time_level": "4h",
+      "time_level_meaning": "中线（4小时级别，常用）",
+      "chanlun_level": 1,
+      "holding_period": "2-7天",
+      "trading_style": "中线"
+    },
+    "fractals": {
+      "total": 30,
+      "top": 14,
+      "bottom": 16,
+      "latest_top": {
+        "price": 78316.0,
+        "index": 196
+      },
+      "latest_bottom": {
+        "price": 73811.54,
+        "index": 179
+      }
+    },
+    "bi": {
+      "total": 14,
+      "up": 6,
+      "down": 8,
+      "latest": {
+        "direction": "down",
+        "start": 73443.1,
+        "end": 70553.52
+      }
+    },
+    "segment": {
+      "total": 4,
+      "up": 2,
+      "down": 2,
+      "latest": {
+        "direction": "down",
+        "start": 72008.99,
+        "end": 67726.99
+      }
+    },
+    "zhongshu": {
+      "total": 1,
+      "latest": {
+        "zg": 71351.73,
+        "zd": 68794.32,
+        "gg": 76000.0,
+        "dd": 67400.0,
+        "level": 1
+      }
+    },
+    "buy_sell_points": {
+      "total": 6,
+      "latest": {
+        "type": "三买",
+        "price": 71235.67,
+        "level": 1,
+        "strength": 0.8
+      },
+      "interpretation": "4h时间级别下的1级三买，短线买点，适用于中线交易（持仓2-7天）"
+    },
+    "trend": {
+      "direction": "下降",
+      "strength": 0.5,
+      "phase": "突破上涨"
+    }
+  },
+  "dynamics": {
+    "rsi": {
+      "value": 69.74,
+      "status": "正常",
+      "interpretation": "未超买未超卖，处于健康区间"
+    },
+    "macd": {
+      "value": 1023.66,
+      "signal": 876.14,
+      "histogram": 147.52,
+      "signal_type": "金叉",
+      "interpretation": "快线穿越慢线，看涨信号"
+    },
+    "volatility": {
+      "value": 1235.44,
+      "status": "高",
+      "interpretation": "市场波动较大，注意风险"
+    },
+    "volume": {
+      "value": 0.34,
+      "status": "缩量",
+      "interpretation": "上涨量能不足"
+    },
+    "momentum": {
+      "direction": "上升",
+      "interpretation": "短期动量向上"
+    }
+  },
+  "sentiment": {
+    "fear_greed_index": 26,
+    "classification": "恐惧",
+    "sentiment": "市场情绪悲观",
+    "implication": "当前市场处于恐惧状态，通常伴随超卖和较低的投资者信心，可能存在逆向投资机会，但需警惕进一步下跌风险",
+    "timestamp": "2026-05-17T00:00:00Z"
+  },
+  "decision": {
+    "decision": "偏空",
+    "emoji": "🔴",
+    "score": 32,
+    "confidence": "中",
+    "current_price": 77152.64,
+    "factors": {
+      "趋势因子": 0,
+      "缠论买卖点": 0,
+      "RSI因子": -8,
+      "MACD因子": -8,
+      "价格位置": -10,
+      "市场情绪": 8
+    },
+    "analysis": "虽然有三买信号（短线买点），但整体处于下降趋势，价格高于中枢高点（76,000），回调压力较大，RSI正常但略高，MACD金叉但得分负值，市场情绪为恐惧（26），综合判断偏空",
+    "trading_plan": {
+      "entry": 77152.64,
+      "position_size": "20%",
+      "take_profit": [
+        {
+          "level": 1,
+          "price": 73811.54,
+          "target": "前期低点",
+          "percentage": "50%"
+        },
+        {
+          "level": 2,
+          "price": 67400.0,
+          "target": "中枢低点",
+          "percentage": "50%"
+        }
+      ],
+      "stop_loss": {
+        "level": 1,
+        "price": 79467.22,
+        "target": "反弹3%"
+      },
+      "risk_reward_ratio": 4.21
+    }
+  },
+  "execution_performance": {
+    "total_time": 80.40,
+    "data_collector": {
+      "time": 12.16,
+      "percentage": 15.1,
+      "status": "正常"
+    },
+    "structure_analyzer": {
+      "time": 21.89,
+      "percentage": 27.2,
+      "status": "可优化（性能瓶颈）"
+    },
+    "dynamics_analyzer": {
+      "time": 7.49,
+      "percentage": 9.3,
+      "status": "优秀"
+    },
+    "sentiment_analyzer": {
+      "time": 5.85,
+      "percentage": 7.3,
+      "status": "优秀"
+    },
+    "decision_maker": {
+      "time": 33.00,
+      "percentage": 41.1,
+      "status": "可优化（最慢）"
+    },
+    "performance_improvement": {
+      "vs_previous": {
+        "total_time": -31.6,
+        "structure_analyzer": -51.0,
+        "decision_maker": -36.7
+      },
+      "notes": "缓存机制生效，性能明显提升"
+    }
+  },
+  "knowledge_base": {
+    "total_items": 22,
+    "completeness": "90%+",
+    "avg_confidence": "85%+",
+    "by_agent": {
+      "data_collector": {
+        "items": 3,
+        "completeness": 95,
+        "confidence": 88
+      },
+      "structure_analyzer": {
+        "items": 9,
+        "completeness": 95,
+        "confidence": 90
+      },
+      "dynamics_analyzer": {
+        "items": 3,
+        "completeness": 100,
+        "confidence": 94
+      },
+      "decision_maker": {
+        "items": 4,
+        "completeness": 90,
+        "confidence": 87
+      },
+      "sentiment_analyzer": {
+        "items": 2,
+        "completeness": 85,
+        "confidence": 84
+      }
+    }
+  },
+  "risk_assessment": {
+    "overall_risk": "中高",
+    "risk_level": 7,
+    "risk_factors": [
+      {
+        "factor": "下降趋势",
+        "impact": "高",
+        "description": "趋势为下降趋势，逆势交易风险较高"
+      },
+      {
+        "factor": "价格位置",
+        "impact": "高",
+        "description": "价格高于中枢高点（76,000），回调压力较大"
+      },
+      {
+        "factor": "成交量",
+        "impact": "中",
+        "description": "缩量上涨，量能不足"
+      },
+      {
+        "factor": "市场情绪",
+        "impact": "中",
+        "description": "恐惧情绪可能引发恐慌性抛售"
+      },
+      {
+        "factor": "决策得分",
+        "impact": "中",
+        "description": "综合得分仅32，置信度为中"
+      }
+    ],
+    "opportunity_factors": [
+      {
+        "factor": "三买信号",
+        "impact": "中",
+        "description": "三买信号（强度0.8），存在反弹可能"
+      },
+      {
+        "factor": "市场情绪",
+        "impact": "中",
+        "description": "市场处于恐惧状态（26），可能存在逆向机会"
+      },
+      {
+        "factor": "MACD金叉",
+        "impact": "低",
+        "description": "MACD金叉，短期动能向上"
+      },
+      {
+        "factor": "盈亏比",
+        "impact": "中",
+        "description": "盈亏比1:4.21，风险收益比合理"
+      }
+    ]
+  },
+  "recommendations": {
+    "trading_suggestion": "偏空操作",
+    "position_size": "20%",
+    "action_items": [
+      "在当前价位附近减仓20%",
+      "价格反弹至$79,467时必须止损",
+      "第一目标$73,811（前期低点），减仓50%",
+      "第二目标$67,400（中枢低点），减仓剩余50%"
+    ],
+    "warnings": [
+      "下降趋势，逆势交易风险较高",
+      "价格高于中枢高点，回调压力较大",
+      "缩量上涨，量能不足",
+      "恐惧情绪可能引发恐慌性抛售",
+      "综合得分仅32，置信度为中"
+    ]
+  },
+  "disclaimer": "本报告仅供参考，不构成投资建议。投资有风险，入市需谨慎。数字货币市场波动剧烈，请理性投资。请根据自身风险承受能力做出决策。建议结合其他分析方法综合判断。"
+}
