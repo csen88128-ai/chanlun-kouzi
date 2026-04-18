@@ -1,19 +1,19 @@
 {
   "execution_times": {
-    "data_collector": 12.987709999084473,
-    "structure_analyzer": 44.68380427360535,
-    "dynamics_analyzer": 7.705973148345947,
-    "sentiment_analyzer": 5.582521200180054,
-    "decision_maker": 61.34290814399719
+    "data_collector": 10.772994995117188,
+    "structure_analyzer": 41.544878244400024,
+    "dynamics_analyzer": 6.884726047515869,
+    "sentiment_analyzer": 6.187070608139038,
+    "decision_maker": 52.14416027069092
   },
-  "total_time": 132.302916765213,
+  "total_time": 117.53383016586304,
   "results": {
     "data": {
       "status": "success",
-      "latest_price": 77149.39,
+      "latest_price": 77158.24,
       "highest": 78316.0,
       "lowest": 65000.0,
-      "h24_change": 2.79,
+      "h24_change": 2.8,
       "time_range": "2026-03-16 00:00:00 ~ 2026-04-18 04:00:00",
       "file_path": "/workspace/projects/data/BTCUSDT_4h_latest.csv",
       "timestamp": "2026-04-18T04:00:00Z"
@@ -135,13 +135,13 @@
       }
     },
     "dynamics": {
-      "rsi": 69.72,
+      "rsi": 69.76,
       "rsi_status": "正常",
-      "macd": 1023.4,
-      "macd_signal": 876.09,
-      "macd_histogram": 147.32,
+      "macd": 1024.11,
+      "macd_signal": 876.23,
+      "macd_histogram": 147.88,
       "macd_signal_type": "金叉",
-      "volatility": 1235.19,
+      "volatility": 1235.88,
       "volatility_status": "高",
       "volume": 0.29,
       "volume_status": "缩量",
@@ -149,8 +149,9 @@
     },
     "sentiment": {
       "fear_greed_index": 26,
-      "classification": "恐惧",
-      "sentiment": "市场悲观，可能存在机会",
+      "classification": "Fear",
+      "sentiment": "恐惧",
+      "implication": "市场悲观，可能存在机会",
       "timestamp": "1776470400"
     },
     "decision": {
@@ -159,18 +160,18 @@
       "emoji": "🔴",
       "score": 17,
       "confidence": "高",
-      "current_price": 77149.39,
+      "current_price": 77158.24,
       "factors": [
         "趋势: -25 (下降)",
         "缠论: +10 (三买, 强度0.80)",
-        "RSI: -8 (偏高 69.7)",
+        "RSI: -8 (偏高 69.8)",
         "MACD: -8 (死叉)",
         "位置: -10 (高于中枢高点)",
         "情绪: +8 (恐惧 26)"
       ],
       "summary": "综合得分: 17.0/100",
       "trading_plan": {
-        "entry": 77149.39,
+        "entry": 77158.24,
         "position_size": "20%",
         "take_profit": [
           {
@@ -187,12 +188,12 @@
         "stop_loss": [
           {
             "level": 1,
-            "price": 79463.87,
+            "price": 79472.99,
             "target": "反弹3%"
           }
         ],
         "risk_reward_ratio": [
-          4.21
+          4.22
         ]
       }
     }
