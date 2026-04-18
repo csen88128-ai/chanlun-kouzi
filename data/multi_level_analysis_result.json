@@ -1,0 +1,20 @@
+{
+  "symbol": "btcusdt",
+  "levels": [
+    "5m",
+    "30m",
+    "4h",
+    "1d"
+  ],
+  "level_analysis": {
+    "5m": {
+      "level": "5m",
+      "level_name": "5分钟级别",
+      "kline_count": 500,
+      "fractals": {
+        "total": 114,
+        "top_count": 53,
+        "bottom_count": 61,
+        "latest": {
+          "index": 496,
+          "type": 
