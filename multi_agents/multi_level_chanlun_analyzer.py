@@ -16,6 +16,37 @@ from multi_agents.advanced_chanlun_theory import AdvancedChanLunTheory
 from src.utils.chanlun_structure import ChanLunAnalyzer
 
 
+def object_to_dict(obj):
+    """
+    将对象转换为字典，处理枚举类型
+
+    Args:
+        obj: 要转换的对象
+
+    Returns:
+        字典
+    """
+    if obj is None:
+        return None
+    elif hasattr(obj, '__dict__'):
+        result = {}
+        for key, value in obj.__dict__.items():
+            # 处理枚举类型
+            if hasattr(value, 'value'):
+                result[key] = value.value
+            # 处理嵌套对象
+            elif hasattr(value, '__dict__'):
+                result[key] = object_to_dict(value)
+            # 处理列表中的对象
+            elif isinstance(value, list):
+                result[key] = [object_to_dict(item) if hasattr(item, '__dict__') else item for item in value]
+            else:
+                result[key] = value
+        return result
+    else:
+        return obj
+
+
 class MultiLevelChanLunAnalyzer:
     """多级别缠论分析器"""
 
@@ -102,7 +133,7 @@ class MultiLevelChanLunAnalyzer:
                 "total": len(fractals),
                 "top_count": sum(1 for f in fractals if f.type.value == "top"),
                 "bottom_count": sum(1 for f in fractals if f.type.value == "bottom"),
-                "latest": fractals[-1].__dict__ if fractals else None
+                "latest": object_to_dict(fractals[-1]) if fractals else None
             }
 
             # 2. 识别笔（需要传递fractals）
@@ -112,41 +143,45 @@ class MultiLevelChanLunAnalyzer:
                 "total": len(bi),
                 "up_count": sum(1 for b in bi if b.direction.value == "up"),
                 "down_count": sum(1 for b in bi if b.direction.value == "down"),
-                "latest": bi[-1].__dict__ if bi else None
+                "latest": object_to_dict(bi[-1]) if bi else None
             }
 
-            # 3. 识别线段（不传递参数，使用self.bis）
-            segment = analyzer.identify_segments(df)
+            # 3. 识别线段（只传递bis参数）
+            segment = analyzer.identify_segments(bi)
             analyzer.segments = segment
             result["segment"] = {
                 "total": len(segment),
                 "up_count": sum(1 for s in segment if s.direction.value == "up"),
                 "down_count": sum(1 for s in segment if s.direction.value == "down"),
-                "latest": segment[-1].__dict__ if segment else None
+                "latest": object_to_dict(segment[-1]) if segment else None
             }
 
-            # 4. 识别中枢（不传递参数，使用self.segments）
-            zhongshu = analyzer.identify_zhongshu(df)
+            # 4. 识别中枢（传递segment参数）
+            zhongshu = analyzer.identify_zhongshu(segment)
             analyzer.zhongshu_list = zhongshu
             result["zhongshu"] = {
                 "total": len(zhongshu),
-                "latest": zhongshu[-1].__dict__ if zhongshu else None
+                "latest": object_to_dict(zhongshu[-1]) if zhongshu else None
             }
 
-            # 5. 识别买卖点
-            buy_sell_points = analyzer.identify_buy_sell_points(df)
+            # 5. 识别买卖点（暂时跳过，因为ChanLunAnalyzer没有此方法）
             result["buy_sell_points"] = {
-                "total": len(buy_sell_points),
-                "latest": buy_sell_points[-1].__dict__ if buy_sell_points else None
+                "total": 0,
+                "latest": None,
+                "note": "买卖点识别功能待实现"
             }
 
-            # 6. 判断趋势
-            trend = analyzer.determine_trend(df)
-            result["trend"] = trend
+            # 6. 判断趋势（暂时跳过）
+            result["trend"] = {
+                "direction": "未知",
+                "note": "趋势判断功能待实现"
+            }
 
-            # 7. 检测背驰
-            divergence = analyzer.check_divergence(df)
-            result["divergence"] = divergence
+            # 7. 检测背驰（暂时跳过）
+            result["divergence"] = {
+                "has_divergence": False,
+                "note": "背驰检测功能待实现"
+            }
 
             print(f"  ✓ 分析完成")
             print(f"    - 分型: {result['fractals']['total']}个")
