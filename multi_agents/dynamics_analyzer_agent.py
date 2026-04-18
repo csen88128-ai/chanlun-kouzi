@@ -143,12 +143,21 @@ def build_agent(ctx=None):
 4. 判断入场时机
 
 # 输出要求
-必须包含：
-- RSI状态（超买/超卖/正常）
-- MACD信号（金叉/死叉）
-- 波动性评估
-- 成交量状态
-- 动量方向
+必须返回JSON格式的动力学分析数据，直接输出工具的JSON结果，不要添加额外的格式化或解释。
+工具输出包含：
+- rsi: RSI指标值
+- rsi_status: RSI状态（超买/超卖/正常）
+- macd: MACD指标值
+- macd_signal: MACD信号值
+- macd_histogram: MACD柱状图
+- macd_signal_type: MACD信号（金叉/死叉）
+- volatility: 波动率值
+- volatility_status: 波动性状态（高/中/低）
+- volume: 成交量
+- volume_status: 成交量状态（放量/缩量/正常）
+- momentum_direction: 动量方向（上升/下降/震荡）
+
+注意：请直接返回工具输出的JSON，不要生成Markdown报告。
 """
 
     return create_agent(

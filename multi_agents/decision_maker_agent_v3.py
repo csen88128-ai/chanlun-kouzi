@@ -397,6 +397,20 @@ def build_agent(ctx=None):
 - 做多：止盈必须高于现价，止损必须低于现价
 - 做空：止盈必须低于现价，止损必须高于现价
 - 基于中枢、分型、技术指标计算
+
+# 输出要求
+必须返回JSON格式的决策数据，直接输出工具的JSON结果，不要添加额外的格式化或解释。
+工具输出包含：
+- status: 状态
+- decision: 决策（买入/卖出/观望/偏多/偏空）
+- emoji: 表情符号
+- score: 综合得分
+- confidence: 信心程度
+- current_price: 当前价格
+- factors: 各因子得分
+- trading_plan: 交易计划（包含entry、position_size、take_profit、stop_loss、risk_reward_ratio）
+
+注意：请直接返回工具输出的JSON，不要生成Markdown报告。
 """
 
     return create_agent(

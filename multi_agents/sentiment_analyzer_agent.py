@@ -137,11 +137,14 @@ def build_agent(ctx=None):
 4. 给出基于情绪的建议
 
 # 输出要求
-必须包含：
-- 恐惧贪婪指数数值
-- 情绪分类（极度贪婪/贪婪/中性/恐惧/极度恐惧）
-- 情绪含义和影响
-- 基于情绪的操作建议
+必须返回JSON格式的市场情绪数据，直接输出工具的JSON结果，不要添加额外的格式化或解释。
+工具输出包含：
+- fear_greed_index: 恐惧贪婪指数数值
+- classification: 情绪分类（极度贪婪/贪婪/中性/恐惧/极度恐惧）
+- sentiment: 情绪状态
+- implication: 情绪含义和影响
+
+注意：请直接返回工具输出的JSON，不要生成Markdown报告。
 """
 
     return create_agent(
